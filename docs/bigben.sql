@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 17 Février 2016 à 15:11
+-- Généré le :  Mer 17 Février 2016 à 21:16
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -69,22 +69,30 @@ CREATE TABLE IF NOT EXISTS `level` (
 --
 
 INSERT INTO `level` (`id_question`, `id_category`, `level`) VALUES
-(1, 1, 4),
-(2, 1, 3),
-(3, 1, 2),
-(4, 1, 3),
+(1, 1, 5),
+(2, 1, 4),
+(3, 1, 5),
+(4, 1, 6),
 (5, 1, 1),
-(6, 1, 10),
-(7, 1, 8),
-(8, 1, 9),
-(9, 1, 5),
-(10, 1, 5),
+(6, 1, 9),
+(7, 1, 7),
+(8, 1, 8),
+(9, 1, 6),
+(10, 1, 6),
 (11, 1, 1),
 (12, 1, 7),
-(13, 1, 6),
-(14, 1, 8),
-(15, 1, 4),
-(16, 1, 2);
+(13, 1, 9),
+(14, 1, 10),
+(15, 1, 3),
+(16, 1, 1),
+(17, 1, 8),
+(18, 1, 4),
+(19, 1, 4),
+(20, 1, 2),
+(21, 1, 3),
+(22, 1, 2),
+(23, 1, 7),
+(24, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -115,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `question` (
   `answer_4` varchar(50) NOT NULL,
   `answer` tinyint(1) NOT NULL,
   PRIMARY KEY (`id_question`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 --
 -- Contenu de la table `question`
@@ -137,7 +145,15 @@ INSERT INTO `question` (`id_question`, `text_question`, `answer_1`, `answer_2`, 
 (13, 'What is the nickname for an English policeman ?', 'A Robby', 'A Robbie', 'A Hobby', 'A Bobby', 4),
 (14, 'In which station does the Eurostar arrive and leave ?\r\n', 'St Pancras', 'Paddington', 'Waterloo', 'Croxley', 1),
 (15, 'What''s the name of the famous bascule and suspension bridge in London ?', 'The Millenium Bridge', 'The Golden Gates', 'The Tower Bridge', 'The Queen Elizabeth II Bridge', 3),
-(16, 'What''s the color of the double-decker buses ?', 'blue', 'black', 'yellow', 'red', 4);
+(16, 'What''s the color of the double-decker buses ?', 'blue', 'black', 'yellow', 'red', 4),
+(17, 'What is the equivalent in London of the French Grevin Museum ?', 'The Madame Tussaud museum', 'The Madame Tussauds museum', 'The Madame Tussaut museum', 'The Madame Tussot museum', 2),
+(18, 'In which movie we would never see the city of London ?', 'The Da Vinci Code', 'Spectre', 'Kingsman: The Secret Service', 'Sherlock Holmes: A Game of Shadows', 3),
+(19, 'Who''s the queen''s husband ?', 'The Duke of Cambridge', 'Prince Harry', 'Prince George', 'The Duke of Edinburgh', 4),
+(20, 'What''s the color of the famous telephone box in London ?', 'blue', 'black', 'red', 'yellow', 3),
+(21, 'In which year were organized olympics games in London ?', '2010', '2011', '2012', '2013', 3),
+(22, 'In which station Harry Potter took the Hogwarts express ?', 'King''s Cross station', 'Waterloo station', 'Victoria train station', 'Saint Pancras station', 1),
+(23, 'Who''s not born in London ?', 'Adele', 'Sam Smith', 'Charlotte Gainsbourg', 'Daniel Radcliffe', 2),
+(24, 'Who did not sing during the closing ceremony of JO in London ?', 'Muse', 'One Direction', 'Spice girls', 'Queen', 4);
 
 -- --------------------------------------------------------
 
@@ -149,9 +165,17 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id_user` int(11) NOT NULL AUTO_INCREMENT,
   `name_user` varchar(30) NOT NULL,
   `pass_user` varchar(500) NOT NULL,
-  `email_user` varchar(100) NOT NULL,
-  PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`id_user`),
+  UNIQUE KEY `name_user` (`name_user`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Contenu de la table `user`
+--
+
+INSERT INTO `user` (`id_user`, `name_user`, `pass_user`) VALUES
+(1, 'Kili', 'bouya'),
+(6, 'Louis_poule', 'poule');
 
 --
 -- Contraintes pour les tables exportées
@@ -161,8 +185,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Contraintes pour la table `match`
 --
 ALTER TABLE `match`
-  ADD CONSTRAINT `constraint_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
-  ADD CONSTRAINT `constraint_1` FOREIGN KEY (`id_game`) REFERENCES `game` (`id_game`);
+  ADD CONSTRAINT `constraint_1` FOREIGN KEY (`id_game`) REFERENCES `game` (`id_game`),
+  ADD CONSTRAINT `constraint_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
