@@ -3,8 +3,13 @@ module.exports = function (app, database, io, passport, router) {
 
 	/** Home page */
 	router.get('/', ensureAuthenticated, function (req, res, next) {
-		var arg = [];
-		giveRender(req, res, 'index.ejs', 'Home - BigBen project', arg);
+
+		// Catch all categories availables
+		database.executeQuery("SELECT * FROM category", function (result) {
+			var arg = [];
+			arg['categories'] = result;
+			giveRender(req, res, 'index.ejs', 'Home - BigBen project', arg);
+		});
 	});
 
 
@@ -24,14 +29,14 @@ module.exports = function (app, database, io, passport, router) {
 		}
 	});
 
-	router.post('/login', passport.authenticate('local'), function (req, res) {
+	router.post('/login', passport.authenticate('local', {
+		failureRedirect: '/login?error=true'
+	}), function (req, res) {
 		if (ensureAuthenticated) {
 			res.redirect('/');
 		} else redirect('/login?error=true');
 	});
 
-	
-	
 
 	/** Launch a new game */
 	router.get('/play', ensureAuthenticated, function (req, res, next) {
@@ -66,7 +71,7 @@ module.exports = function (app, database, io, passport, router) {
 	function giveRender(req, res, page, title) {
 		var render = [];
 		render['title'] = title;
-		
+
 		res.render(page, {
 			arg: render
 		});
