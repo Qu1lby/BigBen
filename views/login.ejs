@@ -5,7 +5,7 @@
     <!-- Mobile First -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>BigBen Game</title>
+    <title>BigBen Project</title>
     
     <!-- CSS | Material -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -23,38 +23,35 @@
       
     <div class="login-page">
       <h1>BigBen</h1>
-      <div class="form" ng-controller="authController" >
-        <form class="register-form" ng-submit="sendSignin()">
+      <div class="form">
+        <form class="register-form" action = "/signin" method="post">
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="username" ng-model="SignUsername">
+            <input class="mdl-textfield__input" type="text" id="username_si" name="username_si" ng-model="SignUsername">
             <label class="mdl-textfield__label" for="username">Username</label>
           </div>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="password" id="password" ng-model="SignPassword">
+            <input class="mdl-textfield__input" type="password" id="password_si" name="password_si" ng-model="SignPassword">
             <label class="mdl-textfield__label" for="password">Password</label>
-          </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="email" ng-model="SignEmail">
-            <label class="mdl-textfield__label" for="email">Email address</label>
           </div>
           <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
             Create
           </button>
-          <p class="message">Already registered? <a href="#">Sign In</a></p>
+          <p class="message">Already registered ? <a href="#">Sign In</a></p>
         </form>
-        <form class="login-form" ng-submit="sendLogin()">
+        
+				<form class="login-form" action = "/login" method="post">
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="username" ng-model="LogUsername">
+            <input class="mdl-textfield__input" type="text" id="username" name="username" ng-model="LogUsername">
             <label class="mdl-textfield__label" for="username">Username</label>
           </div>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="password" id="password" ng_model="LogPassword">
+            <input class="mdl-textfield__input" type="password" id="password" name="password" ng_model="LogPassword">
             <label class="mdl-textfield__label" for="password">Password</label>
           </div>
           <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
             Login
           </button>
-          <p class="message">Not registered? <a href="#">Create an account</a></p>
+          <p class="message">Not registered yet ? <a href="#">Create an account</a></p>
         </form>
       </div>
     </div>

@@ -26,20 +26,23 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: false
+  extended: true
 }));
 
 /* 1 day cookie */
 var my_session = session({
   store: new FileStore(),
-  secret: 'inte1314KlN0811GiMgration',
+  secret: 'angl1314Kl0811Giais',
   saveUninitialized: true,
   resave: true,
-  duration: 60 * 60 * 1000 * 24
+  duration: 60 * 60 * 24 * 1000
 });
 
 app.use(cookieParser());
 app.use(my_session);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', router);
 

@@ -9,9 +9,7 @@ angular.module('myApp', []).controller('authController', function ($scope, $http
             password: password
     };
     
-    $http.post("/login", data).success(function(data, status) {
-        console.log(data);
-    })
+    $http.post("/login", data)
   }       
     
   $scope.sendSignin = function() {

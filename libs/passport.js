@@ -15,11 +15,12 @@ module.exports = function (app, database, passport) {
 
 	passport.use(new LocalStrategy(
 		function (username, password, done) {
+			console.log('r'+ username);
 			database.executeQuery('SELECT * FROM user WHERE name_user = "' + username + '" LIMIT 1', function (rows) {
 				if (!rows.length)
 					return done(null, false);
 
-				if (password == rows[0].pass_user)
+				if (password != rows[0].pass_user)
 					return done(null, false);
 
 				return done(null, rows[0]);

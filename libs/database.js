@@ -41,8 +41,6 @@ database = module.exports = {
 
   /* Escape character */
   escape: function (data) {
-    //var htmlspecialchars = require('htmlspecialchars');
-    //data = htmlspecialchars(data)
     return this.mySqlClient.escape(data);
   }
 }
