@@ -15,7 +15,7 @@ module.exports = function (app, database, passport) {
 
 	passport.use(new LocalStrategy(
 		function (username, password, done) {
-			database.executeSelectQuery('SELECT * FROM user WHERE name_user = "' + username + '" LIMIT 1', function (rows) {
+			database.executeQuery('SELECT * FROM user WHERE name_user = "' + username + '" LIMIT 1', function (rows) {
 				if (!rows.length)
 					return done(null, false);
 

@@ -2,7 +2,7 @@
 module.exports = function (app, database, io, passport, router) {
 
 	/** Home page */
-	router.get('/', ensureAuthenticated, function (req, res, next) {
+	router.get('/', function (req, res, next) {
 		var arg = [];
 		giveRender(req, res, 'index.ejs', 'Home - BigBen project', arg);
 	});
