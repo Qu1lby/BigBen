@@ -5,14 +5,14 @@
 }
 
 body {
-  background: #673AB7; /* fallback for old browsers */
+  background: #673AB7;/* fallback for old browsers */
   background: -webkit-linear-gradient(right, #4527A0, #512DA8);
   background: -moz-linear-gradient(right, #76b852, #8DC26F);
   background: -o-linear-gradient(right, #76b852, #8DC26F);
-  background: linear-gradient(to left, #4527A0, #512DA8);
+  background: linear-gradient(to left, #9b59b6, #512DA8);
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;      
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ----- Login Page ----- */

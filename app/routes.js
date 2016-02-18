@@ -1,5 +1,5 @@
 /* Handles the routing queries */
-module.exports = function (app, database, io, passport, router) {
+module.exports = function (app, database, io, passport, passwordHash, router) {
 
 	/** **Home page** */
 	router.get('/', ensureAuthenticated, function (req, res, next) {
@@ -50,8 +50,8 @@ module.exports = function (app, database, io, passport, router) {
 		if (req.body.username_si != undefined && req.body.password_si != undefined) {
 
 			myQuery = "INSERT INTO user(name_user, pass_user) VALUES(" +
-				database.escape(req.body.username_si) + ", " +
-				database.escape(req.body.password_si) + ")";
+				database.escape(req.body.username_si) + ", '" +
+				passwordHash.generate(req.body.password_si) + "')";
 
 			var data_tmp = database.getSQL();
 			data_tmp.query(myQuery, function (error, results) {

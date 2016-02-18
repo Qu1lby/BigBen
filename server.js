@@ -12,10 +12,11 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var FileStore = require('session-file-store')(session);
 var passport = require('passport');
+var passwordHash = require('password-hash');
 
 /**** Custom libraries ****/
 var database = require('./libs/database.js');
-var pass_init = require('./libs/passport.js')(app, database, passport);
+var pass_init = require('./libs/passport.js')(app, database, passport, passwordHash);
 
 /**** App configuration ****/
 app.engine('html', require('ejs').renderFile);
@@ -50,7 +51,7 @@ app.use('/', router);
 io.use(ios(my_session));
 
 /**** Include routing & socket ****/
-require('./app/routes.js')(app, database, io, passport, router);
+require('./app/routes.js')(app, database, io, passport, passwordHash, router);
 require('./app/socket.js')(app, database, io);
 
 /**** Connection DB - Server ****/

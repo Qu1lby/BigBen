@@ -1,7 +1,7 @@
 /* This module allow to connect the user with our Database */
 var LocalStrategy = require('passport-local').Strategy;
 
-module.exports = function (app, database, passport) {
+module.exports = function (app, database, passport, passwordHash) {
 
 	passport.serializeUser(function (user, done) {
 		done(null, user.id_user);
@@ -15,12 +15,11 @@ module.exports = function (app, database, passport) {
 
 	passport.use(new LocalStrategy(
 		function (username, password, done) {
-			console.log('r'+ username);
 			database.executeQuery('SELECT * FROM user WHERE name_user = "' + username + '" LIMIT 1', function (rows) {
 				if (!rows.length)
 					return done(null, false);
 
-				if (password != rows[0].pass_user)
+				if (passwordHash.verify(rows[0].pass_user, password))
 					return done(null, false);
 
 				return done(null, rows[0]);
