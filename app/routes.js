@@ -5,7 +5,9 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 	router.get('/', ensureAuthenticated, function (req, res, next) {
 
 		// Catch all categories availables
-		database.executeQuery("SELECT * FROM category", function (result) {
+		myQuery = 'SELECT category.*, matchs.point_match FROM category, game, matchs where category.id_category = game.id_category AND matchs.id_game = game.id_game AND matchs.id_user = 1';
+		
+		database.executeQuery("SELECT * FROM category, ", function (result) {
 
 			var arg = [];
 			arg['categories'] = result;
@@ -15,7 +17,7 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 		});
 	});
 
-	
+
 	/** **Launch a new game** */
 	router.get('/play', ensureAuthenticated, function (req, res, next) {
 		giveRender(req, res, 'game.ejs', 'Play - BigBen project');
@@ -28,25 +30,34 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 			res.redirect('/');
 		} else {
 
-			// If true : Connection refused
 			var arg = [];
-			if (req.query.error != undefined)
-				arg['error'] = req.query.error;
+			arg['title'] = "Welcome - BigBen";
+
+			if (req.query.error != undefined) {
+				if (req.query.error == "auth")
+					arg['error'] = "Invalid authentification";
+				else if (req.query.error == "signin")
+					arg['error'] = "Username not available";
+				else if (req.query.error == "tech")
+					arg['error'] = "Something went wrong. Try again";
+			}
+
+			if (req.query.signin != undefined)
+				arg['signin'] = "Account created, log in to continue";
 
 			res.render('login.ejs', {
 				arg: arg
 			});
 		}
 	});
-	
+
 	/** **POST Methods** */
 	router.post('/login', passport.authenticate('local', {
 		successRedirect: '/',
-		failureRedirect: '/login?error=true',
+		failureRedirect: '/login?error=auth',
 	}));
 
 	router.post('/signin', function (req, res, next) {
-		// Check if we have all the informations
 		if (req.body.username_si != undefined && req.body.password_si != undefined) {
 
 			myQuery = "INSERT INTO user(name_user, pass_user) VALUES(" +
@@ -57,11 +68,10 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 			data_tmp.query(myQuery, function (error, results) {
 
 				if (error) {
-					console.log('[ERR] ' + error);
-					console.log('[QUERY] ' + myQuery);
+					console.log("[ERR] " + error);
+					console.log("[QUERY] " + myQuery);
 
-					// UTILISATEUR EXISTANT + FAKE CLIK CREATE (afficher direct bonne fenêtre)
-					res.redirect('/login?signin=false')
+					res.redirect('/login?error=signin')
 					return;
 				}
 
@@ -69,7 +79,7 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 				res.redirect('/login?signin=true');
 			});
 
-		} else res.redirect('/login?signin=false');
+		} else res.redirect('/login?error=tech');
 	});
 
 	/** **Log-out** */

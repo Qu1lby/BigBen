@@ -1,0 +1,12 @@
+Login.ejs : Si arg[error] != undefined 
+
+	-> Afficher l'erreur
+	
+						Si arg[signin] != undefined
+	
+	-> Afficher le message de connection
+	
+	
+index.ejs : Bouton logout (/logout)
+
+	-> Afficher le score relatif à la catégorie
