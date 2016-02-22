@@ -7,7 +7,7 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 		// Catch all categories availables
 		myQuery = 'SELECT category.*, matchs.point_match FROM category, game, matchs where category.id_category = game.id_category AND matchs.id_game = game.id_game AND matchs.id_user = 1';
 		
-		database.executeQuery("SELECT * FROM category, ", function (result) {
+		database.executeQuery("SELECT * FROM category", function (result) {
 
 			var arg = [];
 			arg['categories'] = result;
