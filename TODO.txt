@@ -12,3 +12,12 @@ index.ejs : Bouton logout (/logout)
 	-> Afficher le score relatif à la catégorie
 	
 	-> Soucis avec le by <3 de Tic et Tac
+	
+	-> Affichage dynamique des catégories :
+			arg['categories'] = res_1; Tu as pour chaque clé : id_category (garder pour la redirection play?id=1 ) et name_category
+			arg['points'] = concat_res; Tu as pour chaque clé (name_category) les points correspondants aux joueurs. Si taille == 0 : pas joué.
+	
+	-> J'aime bien les couleurs mode trivial pursuit, je peux te filer un tableau avec les codes si tu m'envois les couleurs comme ça même en dynamique ca change
+	
+	
+game.ejs : Ajouter de la musique :D Genre les beatles pour le quizz London (osef des droits c'est du local)

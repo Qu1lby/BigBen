@@ -5,15 +5,28 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 	router.get('/', ensureAuthenticated, function (req, res, next) {
 
 		// Catch all categories availables
-		myQuery = 'SELECT category.*, matchs.point_match FROM category, game, matchs where category.id_category = game.id_category AND matchs.id_game = game.id_game AND matchs.id_user = 1';
-		
-		database.executeQuery("SELECT * FROM category", function (result) {
+		database.executeQuery("SELECT * FROM category", function (res_1) {
 
-			var arg = [];
-			arg['categories'] = result;
-			arg['user_id'] = req.user.id_user;
-			arg['user_name'] = req.user.name;
-			giveRender(req, res, 'index.ejs', 'Home - BigBen project', arg);
+			myQuery = "SELECT game.id_category, matchs.point_match FROM game, matchs where matchs.id_game = game.id_game AND matchs.id_user = " + req.user.id_user;
+			database.executeQuery(myQuery, function (res_2) {
+
+				var concat_res = []
+
+				for (var i = 0; i < res_1.length; i++) {
+					for (var j = 0; i < res_2.length; j++) {
+						if (res_2[j].id_category == res_1[i].id_category) {
+							concat_res[res_1.name_category] = res_2.point_match;
+						}
+					}
+				}
+
+				var arg = [];
+				arg['categories'] = res_1;
+				arg['points'] = concat_res;
+				arg['user_id'] = req.user.id_user;
+				arg['user_name'] = req.user.name;
+				giveRender(req, res, 'index.ejs', 'Home - BigBen project', arg);
+			});
 		});
 	});
 
