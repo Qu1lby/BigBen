@@ -10,3 +10,5 @@ Login.ejs : Si arg[error] != undefined
 index.ejs : Bouton logout (/logout)
 
 	-> Afficher le score relatif à la catégorie
+	
+	-> Soucis avec le by <3 de Tic et Tac
