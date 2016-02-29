@@ -20,4 +20,10 @@ index.ejs : Bouton logout (/logout)
 	-> J'aime bien les couleurs mode trivial pursuit, je peux te filer un tableau avec les codes si tu m'envois les couleurs comme ça même en dynamique ca change
 	
 	
-game.ejs : Ajouter de la musique :D Genre les beatles pour le quizz London (osef des droits c'est du local)
+game.ejs : Ajouter de la musique ! Genre les beatles pour le quizz London (osef des droits c'est du local) :D
+
+	-> Bouton play qui emit avec l'id_category (URL) sous le nom "category" au socket "play_first"
+				-> RETURN socket "question"	id_game: myGame, id_question, question, a_1, a_2, a_3, a_4
+				
+	-> Après choix d'une réponse : socket "get_answer" avec id_question, answer (ID answer)
+				-> RETURN socket "back_answer" : verdict -> true or false

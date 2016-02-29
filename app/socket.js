@@ -17,38 +17,61 @@ module.exports = function (app, database, io) {
 
 		/** **Start a game :** 
 		 * Call when the user click on play
-		 * Parameters needed : category, level
+		 * Parameters needed : category
 		 **/
 		socket.on('play_first', function (data) {
 
-			var myQuery = 'SELECT * FROM match, game WHERE id_user = ' + req.user.id_user + ' AND id_category = ' + data.category;
+			var myQuery = 'SELECT * FROM matchs, game WHERE id_user = ' + req.user.id_user + ' AND id_category = ' + data.category;
 			var myGame = 0;
-			database.executeQuery(myQuery, function(result) {
-				if (result.length == 0) {
+			database.executeQuery(myQuery, function (res_1) {
+				if (res_1.length == 0) {
 					myQuery = 'INSERT INTO game(id_category) VALUES ( ' + data.category + ' )';
-					database.executeQuery(myQuery, function(result) {
-						myGame = result[0].id_game;
-						myQuery = 'INSERT INTO match(id_game, id_user) VALUE ( ' + myGame + ', ' + data.id_user + ')';
+					database.executeQuery(myQuery, function (res_2) {
+						myGame = res_2[0].id_game;
+						myQuery = 'INSERT INTO matchs(id_game, id_user) VALUE ( ' + myGame + ', ' + data.id_user + ')';
+					});
+				} else myGame = res_1[0].id_game;
+
+				myQuery = 'SELECT * FROM question NATURAL JOIN level WHERE level = 1 AND id_category = ' + data.category;
+				database.executeQuery(myQuery, function (res_3) {
+
+					var random = Math.floor((Math.random() * res_3.length));
+
+					socket.emit('question', {
+						id_game: myGame,
+						id_question: res[3].id_question,
+						question: res[3].text_question,
+						a_1: res[3].answer_1,
+						a_2: res[3].answer_2,
+						a_3: res[3].answer_3,
+						a_4: res[3].answer_4
+					});
+				});
+			});
+		});
+
+		/** **Check an answer :** 
+		 * Parameters needed : id_question, answer
+		 **/
+		socket.on('get_answer', function (data) {
+			var myQuery = 'SELECT answer FROM question WHERE id_question = ' + date.id_question;
+			database.executeQuery(myQuery, function (result) {
+				if(result.length == 0){
+					socket.emit('back_answer', {
+						verdict : false
+					});
+				}
+				
+				if(data.answer == result[0]){
+					socket.emit('back_answer', {
+						verdict : true
+					});
+				}else{
+					socket.emit('back_answer', {
+						verdict : false
 					});
 				}
 			});
 		});
-		/*
-						AJOUTER LES QUESTIONS
-						var myQuery = 'UPDATE points SET vu = 1 WHERE vu = 0 AND id_1a = ' + socket.handshake.session.user.id_user; database.executeQuery(myQuery, function (result) {
-
-							socket.emit('question', {
-								question: data.point,
-								a_1: data.id_user,
-								a_2: data.id_user,
-								a_3: data.id_user,
-								a_4: data.id_user,
-							});
-						});
-					});
-
-		*/
-
-
 	});
 }
