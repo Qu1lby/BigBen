@@ -12,10 +12,12 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 
 				var concat_res = []
 
-				for (var i = 0; i < res_1.length; i++) {
-					for (var j = 0; i < res_2.length; j++) {
-						if (res_2[j].id_category == res_1[i].id_category) {
-							concat_res[res_1.name_category] = res_2.point_match;
+				if (res_2.length != 0) {
+					for (var i = 0; i < res_1.length; i++) {
+						for (var j = 0; j < res_2.length; j++) {
+							if (res_2[j].id_category == res_1[i].id_category) {
+								concat_res[res_1.name_category] = res_2.point_match;
+							}
 						}
 					}
 				}
