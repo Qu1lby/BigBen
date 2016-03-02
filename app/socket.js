@@ -31,7 +31,10 @@ module.exports = function (app, database, io) {
 						myQuery = 'INSERT INTO matchs(id_game, id_user) VALUE ( ' + myGame + ', ' + data.id_user + ')';
 					});
 				} else myGame = res_1[0].id_game;
-
+				
+				// Save in session
+				socket.handshake.session.passport.user.id_game = myGame;
+				
 				myQuery = 'SELECT * FROM question NATURAL JOIN level WHERE level = 1 AND id_category = ' + data.category;
 				database.executeQuery(myQuery, function (res_3) {
 
@@ -39,12 +42,12 @@ module.exports = function (app, database, io) {
 
 					socket.emit('question', {
 						id_game: myGame,
-						id_question: res[3].id_question,
-						question: res[3].text_question,
-						a_1: res[3].answer_1,
-						a_2: res[3].answer_2,
-						a_3: res[3].answer_3,
-						a_4: res[3].answer_4
+						id_question: res[random].id_question,
+						question: res[random].text_question,
+						a_1: res[random].answer_1,
+						a_2: res[random].answer_2,
+						a_3: res[random].answer_3,
+						a_4: res[random].answer_4
 					});
 				});
 			});
@@ -56,22 +59,55 @@ module.exports = function (app, database, io) {
 		socket.on('get_answer', function (data) {
 			var myQuery = 'SELECT answer FROM question WHERE id_question = ' + date.id_question;
 			database.executeQuery(myQuery, function (result) {
-				if(result.length == 0){
+				if (result.length == 0) {
 					socket.emit('back_answer', {
-						verdict : false
+						verdict: false
 					});
 				}
-				
-				if(data.answer == result[0]){
+
+				if (data.answer == result[0]) {
 					socket.emit('back_answer', {
-						verdict : true
+						verdict: true
 					});
-				}else{
+				} else {
 					socket.emit('back_answer', {
-						verdict : false
+						verdict: false
 					});
 				}
 			});
 		});
+
+		/** **Next question :** 
+		 * Parameters needed : level, category
+		 **/
+		socket.on('next_one', function (data) {
+			myQuery = 'SELECT * FROM question NATURAL JOIN level WHERE level = ' + data.level + ' AND id_category = ' + data.category;
+			database.executeQuery(myQuery, function (result) {
+				var random = Math.floor((Math.random() * result.length));
+
+				socket.emit('question', {
+					id_question: result[random].id_question,
+					question: result[random].text_question,
+					a_1: result[random].answer_1,
+					a_2: result[random].answer_2,
+					a_3: result[random].answer_3,
+					a_4: result[random].answer_4
+				});
+			});
+		});
+		
+		/** **Game Over :** 
+		 * Parameters needed : level
+		 **/
+		socket.on('next_one', function (data) {
+			
+			var point = (100 * data.level) + (Math.floor((Math.random() * data.level) * 25)
+																				
+			myQuery = 'UPDATE matchs SET point_match = ' + points + ' WHERE id_game = ' + socket.handshake.session.passport.user.id_game;
+			database.executeQuery(myQuery, function (res) {
+				socket.emit('end');
+			});
+		});
+
 	});
 }

@@ -27,7 +27,7 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 				arg['points'] = concat_res;
 				arg['user_id'] = req.user.id_user;
 				arg['user_name'] = req.user.name;
-				giveRender(req, res, 'index.ejs', 'Home - BigBen project', arg);
+				giveRender(req, res, 'index.ejs', 'Home - BigBen', arg);
 			});
 		});
 	});
@@ -35,7 +35,10 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 
 	/** **Launch a new game** */
 	router.get('/play', ensureAuthenticated, function (req, res, next) {
-		giveRender(req, res, 'game.ejs', 'Play - BigBen project');
+		// Check query argument
+    if (req.query.id != undefined && !isNaN(req.query.id)) {
+			giveRender(req, res, 'game.ejs', 'Play - BigBen');
+		} else res.redirect('/404');
 	});
 
 
