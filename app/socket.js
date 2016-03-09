@@ -31,10 +31,10 @@ module.exports = function (app, database, io) {
 						myQuery = 'INSERT INTO matchs(id_game, id_user) VALUE ( ' + myGame + ', ' + data.id_user + ')';
 					});
 				} else myGame = res_1[0].id_game;
-				
+
 				// Save in session
 				socket.handshake.session.passport.user.id_game = myGame;
-				
+
 				myQuery = 'SELECT * FROM question NATURAL JOIN level WHERE level = 1 AND id_category = ' + data.category;
 				database.executeQuery(myQuery, function (res_3) {
 
@@ -95,19 +95,22 @@ module.exports = function (app, database, io) {
 				});
 			});
 		});
-		
+
 		/** **Game Over :** 
 		 * Parameters needed : level
 		 **/
 		socket.on('next_one', function (data) {
-			
-			var point = (100 * data.level) + (Math.floor((Math.random() * data.level) * 25)
-																				
-			myQuery = 'UPDATE matchs SET point_match = ' + points + ' WHERE id_game = ' + socket.handshake.session.passport.user.id_game;
+
+			var random = (Math.floor((Math.random() * data.level) * 20));
+			var point = (10 * data.level * data.level)
+
+			myQuery = 'UPDATE matchs SET point_match = ' + (point + random) + ' WHERE id_game = ' + socket.handshake.session.passport.user.id_game;
 			database.executeQuery(myQuery, function (res) {
-				socket.emit('end');
+				socket.emit('end', {
+					random: random,
+					points: point
+				});
 			});
 		});
-
 	});
 }

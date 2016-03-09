@@ -36,7 +36,7 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 	/** **Launch a new game** */
 	router.get('/play', ensureAuthenticated, function (req, res, next) {
 		// Check query argument
-    if (req.query.id != undefined && !isNaN(req.query.id)) {
+		if (req.query.id != undefined && !isNaN(req.query.id)) {
 			giveRender(req, res, 'game.ejs', 'Play - BigBen');
 		} else res.redirect('/404');
 	});
@@ -106,6 +106,14 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 		res.redirect('/');
 	});
 
+	/** **Log-out** */
+	router.get('/podium', function (req, res, next) {
+		var arg = [];
+		database.executeQuery("Select SUM(point_match) as total, name_user FROM user NATURAL JOIN matchs GROUP BY id_user ORDER BY total ", function (result) {
+			arg['rank'] = result;
+			giveRender(req, res, 'rank.ejs', 'Rank - BigBen', arg);
+		});
+	});
 
 	/** **Redirection on this specific error** */
 	app.get('/css', ensureAuthenticated, function (req, res, next) {
