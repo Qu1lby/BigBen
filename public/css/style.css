@@ -78,6 +78,10 @@ body {
   display: none;
 }
 
+.login-error {
+  color: #c0392b;
+}
+
 /* ----- !Login Page ----- */
 
 /* ----- Index Page ----- */

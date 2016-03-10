@@ -31,9 +31,17 @@
   <body ng-app="myApp">
       
     <div class="login-page">
-			<div class="conteneur" style="width:360px;"> <img style="width:360px" src="img/Bigben.png" alt="BigBen"/> </div>
+      <div class="conteneur" style="width:360px;">
+        <img style="width:360px" src="img/Bigben.png" alt="BigBen"/>
+      </div>
+      
       <div class="form">
         <form class="register-form" action = "/signin" method="post">
+          <% if (typeof arg['error_signin'] != 'undefined') { %>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <p class="login-error"><%= arg['error_signin'] %></p>
+          </div>
+          <% } %>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" type="text" id="username_si" name="username_si" ng-model="SignUsername">
             <label class="mdl-textfield__label" for="username">Username</label>
@@ -48,7 +56,12 @@
           <p class="message">Already registered ? <a href="#">Sign In</a></p>
         </form>
         
-				<form class="login-form" action = "/login" method="post">
+        <form class="login-form" action = "/login" method="post">
+          <% if (typeof arg['error_auth'] != 'undefined') { %>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <p class="login-error"><%= arg['error_auth'] %></p>
+          </div>
+          <% } %>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" type="text" id="username" name="username" ng-model="LogUsername">
             <label class="mdl-textfield__label" for="username">Username</label>
