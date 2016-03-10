@@ -4,6 +4,8 @@
     src: url('../fonts/Pacifico.ttf');
 }
 
+/* ----- General ----- */
+
 body {
   background: -webkit-linear-gradient(to left, #2c3e50, #34495e);
   background: -moz-linear-gradient(to left, #2c3e50, #34495e);
@@ -12,6 +14,12 @@ body {
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.logout {
+  position: absolute;
+  right: 10px;
+  top: 10px;
 }
 
 /* ----- Login Page ----- */
@@ -74,11 +82,11 @@ body {
 
 /* ----- Index Page ----- */
 
-.index-page {
+.header {
   width: 360px;
   margin: auto;
 }
-.index-page h1 {
+.header h1 {
   font-family: "Pacifico";
   color: aliceblue;
   font-size: 4em;
