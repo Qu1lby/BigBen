@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 17 Février 2016 à 21:16
+-- Généré le :  Jeu 10 Mars 2016 à 11:06
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -29,15 +29,17 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `category` (
   `id_category` tinyint(4) NOT NULL AUTO_INCREMENT,
   `name_category` varchar(25) NOT NULL,
+  `desc_category` varchar(300) NOT NULL,
   PRIMARY KEY (`id_category`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Contenu de la table `category`
 --
 
-INSERT INTO `category` (`id_category`, `name_category`) VALUES
-(1, 'London');
+INSERT INTO `category` (`id_category`, `name_category`, `desc_category`) VALUES
+(1, 'London', 'Do you really know London and his secrets ?'),
+(2, 'Cinema', 'British and American famous movies ');
 
 -- --------------------------------------------------------
 
@@ -49,7 +51,15 @@ CREATE TABLE IF NOT EXISTS `game` (
   `id_game` smallint(6) NOT NULL AUTO_INCREMENT,
   `id_category` tinyint(4) NOT NULL,
   PRIMARY KEY (`id_game`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Contenu de la table `game`
+--
+
+INSERT INTO `game` (`id_game`, `id_category`) VALUES
+(1, 1),
+(3, 2);
 
 -- --------------------------------------------------------
 
@@ -92,21 +102,38 @@ INSERT INTO `level` (`id_question`, `id_category`, `level`) VALUES
 (21, 1, 3),
 (22, 1, 2),
 (23, 1, 7),
-(24, 1, 5);
+(24, 1, 5),
+(25, 2, 8),
+(26, 2, 5),
+(27, 2, 6),
+(28, 2, 2),
+(29, 2, 4),
+(30, 2, 3),
+(31, 2, 7),
+(32, 2, 9),
+(33, 2, 10),
+(34, 2, 1);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `match`
+-- Structure de la table `matchs`
 --
 
-CREATE TABLE IF NOT EXISTS `match` (
+CREATE TABLE IF NOT EXISTS `matchs` (
   `id_game` smallint(6) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `point_match` int(11) NOT NULL,
+  `point_match` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_game`,`id_user`),
   KEY `constraint_2` (`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `matchs`
+--
+
+INSERT INTO `matchs` (`id_game`, `id_user`, `point_match`) VALUES
+(1, 8, 500);
 
 -- --------------------------------------------------------
 
@@ -123,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `question` (
   `answer_4` varchar(50) NOT NULL,
   `answer` tinyint(1) NOT NULL,
   PRIMARY KEY (`id_question`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
 
 --
 -- Contenu de la table `question`
@@ -153,7 +180,17 @@ INSERT INTO `question` (`id_question`, `text_question`, `answer_1`, `answer_2`, 
 (21, 'In which year were organized olympics games in London ?', '2010', '2011', '2012', '2013', 3),
 (22, 'In which station Harry Potter took the Hogwarts express ?', 'King''s Cross station', 'Waterloo station', 'Victoria train station', 'Saint Pancras station', 1),
 (23, 'Who''s not born in London ?', 'Adele', 'Sam Smith', 'Charlotte Gainsbourg', 'Daniel Radcliffe', 2),
-(24, 'Who did not sing during the closing ceremony of JO in London ?', 'Muse', 'One Direction', 'Spice girls', 'Queen', 4);
+(24, 'Who did not sing during the closing ceremony of JO in London ?', 'Muse', 'One Direction', 'Spice girls', 'Queen', 4),
+(25, 'Which is the highest-grossing British film in the UK?\r\n', 'Mamma Mia', 'Casino Royale', 'Harry Potter and the Deathly Hallows – Part 2', 'Skyfall', 3),
+(26, 'How many actors have played James Bond in official films?', '3', '5', '7', '10', 3),
+(27, 'Where was Charlie Chaplin born?', 'London', 'Manchester', 'Liverpool', 'Oxford', 1),
+(28, 'Which of those isn''t a British movie?', 'Slumdog Millionaire', 'Bridget Jones', 'Harry Potter', 'Transformers', 4),
+(29, 'Which of those isn''t a British movie?', '12 angry men', 'Monthy Python', 'A clockwork orange', 'The golden compass', 1),
+(30, 'What is the full title to the sequel to the film "Home Alone"?', 'Home Alone 2: Lost in Central Park', 'Home Alone 2: Lost In New York', 'Home Alone 2: Again', 'Home Alone 2: Lost again', 2),
+(31, 'What was the name of Stanley Kubriks landmark 1968 sci-fi blockbuster?', '2001: A Space Odyssey', 'Dr. Strangelove', 'A Clockwork Orange', 'The Shining', 1),
+(32, 'What year did E.T. Hit the cinema screen?', '1972', '1982', '1992', '2002', 2),
+(33, 'Guess which movie are not officially British?', 'Avengers: The Age of Ultron', 'Guardians of the Galaxy', 'Mission: Impossible - Rogue Nation', 'Gravity', 3),
+(34, 'In which movie we would never see the city of London ?', 'The Da Vinci Code', 'Spectre', 'Kingsman: The Secret Service', 'Sherlock Holmes: A Game of Shadows', 3);
 
 -- --------------------------------------------------------
 
@@ -167,24 +204,23 @@ CREATE TABLE IF NOT EXISTS `user` (
   `pass_user` varchar(500) NOT NULL,
   PRIMARY KEY (`id_user`),
   UNIQUE KEY `name_user` (`name_user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Contenu de la table `user`
 --
 
 INSERT INTO `user` (`id_user`, `name_user`, `pass_user`) VALUES
-(1, 'Kili', 'bouya'),
-(6, 'Louis_poule', 'poule');
+(8, 'Kili', 'sha1$ea0b2758$1$3a1a3371f4db3cfa816ab636b31b2af358604106');
 
 --
 -- Contraintes pour les tables exportées
 --
 
 --
--- Contraintes pour la table `match`
+-- Contraintes pour la table `matchs`
 --
-ALTER TABLE `match`
+ALTER TABLE `matchs`
   ADD CONSTRAINT `constraint_1` FOREIGN KEY (`id_game`) REFERENCES `game` (`id_game`),
   ADD CONSTRAINT `constraint_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 
