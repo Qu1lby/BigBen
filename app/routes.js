@@ -53,11 +53,11 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 
 			if (req.query.error != undefined) {
 				if (req.query.error == "auth")
-					arg['error'] = "Invalid authentification";
+					arg['error_auth'] = "Invalid authentification";
 				else if (req.query.error == "signin")
-					arg['error'] = "Username not available";
+					arg['error_signin'] = "Username not available";
 				else if (req.query.error == "tech")
-					arg['error'] = "Something went wrong. Try again";
+					arg['error_tech'] = "Something went wrong. Try again";
 			}
 
 			if (req.query.signin != undefined)
