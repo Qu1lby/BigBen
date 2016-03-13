@@ -61,7 +61,7 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 			}
 
 			if (req.query.signin != undefined)
-				arg['signin'] = "Account created, log in to continue";
+				arg['signin'] = "Account created, login to continue";
 
 			res.render('login.ejs', {
 				arg: arg
@@ -78,9 +78,11 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 	router.post('/signin', function (req, res, next) {
 		if (req.body.username_si != undefined && req.body.password_si != undefined) {
 
+			var pass = passwordHash.generate(req.body.password_si);
+			console.log(pass);
+			
 			myQuery = "INSERT INTO user(name_user, pass_user) VALUES(" +
-				database.escape(req.body.username_si) + ", '" +
-				passwordHash.generate(req.body.password_si) + "')";
+				database.escape(req.body.username_si) + ", '" + pass + "')";
 
 			var data_tmp = database.getSQL();
 			data_tmp.query(myQuery, function (error, results) {

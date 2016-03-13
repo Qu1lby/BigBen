@@ -53,13 +53,23 @@
           <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
             Create
           </button>
-          <p class="message">Already registered ? <a href="#">Sign In</a></p>
+          <p class="message">Already registered ? <a href="#">Log you in</a></p>
         </form>
         
         <form class="login-form" action = "/login" method="post">
-          <% if (typeof arg['error_auth'] != 'undefined') { %>
+					<% if (typeof arg['signin'] != 'undefined') { %>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <p class="login-good"><%= arg['signin'] %></p>
+          </div>
+          <% } %>
+					<% if (typeof arg['error_auth'] != 'undefined') { %>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <p class="login-error"><%= arg['error_auth'] %></p>
+          </div>
+          <% } %>
+					 <% if (typeof arg['error_signin'] != 'undefined') { %>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <p class="login-error"><%= arg['error_signin'] %></p>
           </div>
           <% } %>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -87,11 +97,19 @@
   <!-- JS | Bootstrap -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   
+	<script src="js/authController.js"></script>
+	
   <script>
   $('.message a').click(function(){
     $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
   });
+		
+	<% if (typeof arg['error_signin'] != 'undefined') { %>
+		$('.login-form').ready(function(){
+			$('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+		});
+  <% } %>
+		
   </script>
-  <script src="js/authController.js"></script>
   
 </html>
