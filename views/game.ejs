@@ -16,31 +16,27 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     
   </head>
-  <body>
-      
-    <% include includes/header.ejs %>
-    
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div id="question">
-            <h1>Which is the color of the white horse of the fucKing Henry IV ?</h1>
+  <body id="particles">
+    <% include includes/logout.ejs %>
+    <div id="intro">
+      <% include includes/header.ejs %>
+      <div class="container">
+        
+        <div class="row">
+          <div class="col-md-12">
+            <div id="question">
+              <h1>Which is the color of the white horse of the fucKing Henry IV ?</h1>
+            </div>
           </div>
         </div>
-      </div>
-      <div id="footer">
-        <h6 class="text-center">Developed w/ <span style="color:#e0392b">♥</span> by Kilian & Guillaume</h6>
+        <div id="footer">
+          <h6 class="text-center">Developed w/ <span style="color:#e0392b">♥</span> by Kilian & Guillaume</h6>
+        </div>
       </div>
     </div>
-    
   </body>
       
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <!-- JS | Material -->
-  <script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
-  <!-- JS | Bootstrap -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <% include includes/script.ejs %>
   
   <script>
   $('.message a').click(function(){

@@ -15,9 +15,6 @@
     <!-- CSS | Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     
-    <!-- JS | Angular -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
-    
     <style>
       body {
         background: -webkit-linear-gradient(to left, #2c3e50, #34495e);
@@ -28,8 +25,8 @@
     </style>
     
   </head>
-  <body ng-app="myApp">
-      
+  <body id="particles">
+    <div id="intro">
     <div class="login-page">
       <div class="conteneur" style="width:360px;">
         <img style="width:360px" src="img/Bigben.png" alt="BigBen"/>
@@ -48,11 +45,11 @@
           </div>
           <% } %>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="username_si" name="username_si" ng-model="SignUsername">
+            <input class="mdl-textfield__input" type="text" id="username_si" name="username_si">
             <label class="mdl-textfield__label" for="username">Username</label>
           </div>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="password" id="password_si" name="password_si" ng-model="SignPassword">
+            <input class="mdl-textfield__input" type="password" id="password_si" name="password_si">
             <label class="mdl-textfield__label" for="password">Password</label>
           </div>
           <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
@@ -83,11 +80,11 @@
           </div>
           <% } %>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="username" name="username" ng-model="LogUsername">
+            <input class="mdl-textfield__input" type="text" id="username" name="username">
             <label class="mdl-textfield__label" for="username">Username</label>
           </div>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="password" id="password" name="password" ng_model="LogPassword">
+            <input class="mdl-textfield__input" type="password" id="password" name="password">
             <label class="mdl-textfield__label" for="password">Password</label>
           </div>
           <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
@@ -97,17 +94,10 @@
         </form>
       </div>
     </div>
-    
+    </div>
   </body>
       
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <!-- JS | Material -->
-  <script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
-  <!-- JS | Bootstrap -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-  
-	<script src="js/authController.js"></script>
+  <% include includes/script.ejs %>
 	
   <script>
   $('.message a').click(function(){
@@ -119,7 +109,6 @@
 			$('form').animate({height: "toggle", opacity: "toggle"}, "slow");
 		});
   <% } %>
-		
   </script>
   
 </html>
