@@ -1,19 +1,21 @@
-Login.ejs : Si arg[error] != undefined 
+DETAIL A FAIRE : 
 
-	-> Afficher l'erreur
-	
-						Si arg[signin] != undefined
-	
-	-> Afficher le message de connection
-	
-	-> Quelques broutilles avec les couleurs
-	
+Login.ejs : Parfait sauf hover sur les boutons : couleur moche	
 	
 index.ejs : Bouton logout (/logout)
 
-	-> Afficher le score relatif à la catégorie
+	-> Ajouter bouton TOP 15 players "/podium"
 	
-	-> Soucis avec le by <3 de Tic et Tac
+					
+rank.ejs : Tout est fait -> Faire un tableau ESTHETIQUE :P
+	
+	
+	
+	
+	Je commence a taffer la dessus :)
+	
+
+	-> Afficher le score relatif à la catégorie
 	
 	-> Affichage dynamique des catégories :
 			arg['categories'] = res_1; Tu as pour chaque clé : id_category (garder pour la redirection play?id=1 ) et name_category
@@ -30,8 +32,3 @@ game.ejs : Ajouter de la musique ! Genre les beatles pour le quizz London (osef 
 	-> Après choix d'une réponse : socket "get_answer" avec id_question, answer (ID answer)
 				-> RETURN socket "back_answer" : verdict -> true or false
 				
-				
-rank.ejs : Tout faire pour afficher les 10 meilleurs joueurs. arg['result'] -> name_user et total
-	
-	
-	NB pour Kili : Potentiels problèmes avec l'id_game

@@ -61,7 +61,7 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 			}
 
 			if (req.query.signin != undefined)
-				arg['signin'] = "Account created, login to continue";
+				arg['signin'] = "Account created, log	in to continue";
 
 			res.render('login.ejs', {
 				arg: arg
@@ -80,7 +80,7 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 
 			var pass = passwordHash.generate(req.body.password_si);
 			console.log(pass);
-			
+
 			myQuery = "INSERT INTO user(name_user, pass_user) VALUES(" +
 				database.escape(req.body.username_si) + ", '" + pass + "')";
 
@@ -111,7 +111,7 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 	/** **Log-out** */
 	router.get('/podium', function (req, res, next) {
 		var arg = [];
-		database.executeQuery("Select SUM(point_match) as total, name_user FROM user NATURAL JOIN matchs GROUP BY id_user ORDER BY total ", function (result) {
+		database.executeQuery("Select SUM(point_match) as total, name_user FROM user NATURAL JOIN matchs GROUP BY id_user ORDER BY total DESC   LIMIT 15", function (result) {
 			arg['rank'] = result;
 			giveRender(req, res, 'rank.ejs', 'Rank - BigBen', arg);
 		});
@@ -140,9 +140,14 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 
 
 	/** **Take informations and build the view** */
-	function giveRender(req, res, page, title) {
+	function giveRender(req, res, page, title, compl_render) {
 		var render = [];
 		render['title'] = title;
+		
+		 // Add all extra informations
+    for (val in compl_render) {
+      render[val] = compl_render[val];
+    }
 
 		res.render(page, {
 			arg: render
