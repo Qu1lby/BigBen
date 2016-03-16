@@ -1,5 +1,19 @@
-﻿index.ejs :
+DETAIL A FAIRE : (nique le détail)
 
+Login.ejs : Parfait sauf hover sur les boutons : couleur moche	=> Impossible de changer, tant pis :P
+	
+index.ejs : 
+
+	-> Ajouter bouton TOP 15 players "/podium"
+	
+					
+rank.ejs : Tout est fait -> Faire un tableau ESTHETIQUE :P
+	
+	
+	
+	
+	Je commence a taffer la dessus :)
+	
 	-> Afficher le score relatif à la catégorie
 	
 	-> Affichage dynamique des catégories :
@@ -17,8 +31,3 @@ game.ejs : Ajouter de la musique ! Genre les beatles pour le quizz London (osef 
 	-> Après choix d'une réponse : socket "get_answer" avec id_question, answer (ID answer)
 				-> RETURN socket "back_answer" : verdict -> true or false
 				
-				
-rank.ejs : Tout faire pour afficher les 10 meilleurs joueurs. arg['result'] -> name_user et total
-	
-	
-	NB pour Kili : Potentiels problèmes avec l'id_game
