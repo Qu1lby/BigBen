@@ -21,6 +21,9 @@
     <% include includes/header.ejs %>
     
     <div class="container">
+      
+         <%= arg['categories'].name_category %>
+      
       <div class="row">
         <div class="col-md-3 col-md-offset-3 mdl-card mdl-shadow--2dp">
           <div class="mdl-card__title">
@@ -75,9 +78,11 @@
             Mauris sagittis pellentesque lacus eleifend lacinia...
           </div>
           <div class="science mdl-card__actions mdl-card--border">
-            <button class="science mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-              Get Started
-            </button>
+            <a href="">
+              <button class="science mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                Get Started
+              </button>
+            </a>
           </div>
         </div>
       </div>

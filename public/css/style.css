@@ -22,6 +22,10 @@ body {
   top: 10px;
 }
 
+.theme-color {
+  color: #b53a42;
+}
+
 /* ----- Login Page ----- */
 
 .login-page {
@@ -63,7 +67,7 @@ body {
   cursor: pointer;
 }
 .form button:hover,.form button:active,.form button:focus {
-  background: #673AB7;
+  background: #b53a42;
 }
 .form .message {
   margin: 15px 0 0;
@@ -80,6 +84,10 @@ body {
 
 .login-error {
   color: #c0392b;
+}
+
+.login-success {
+  color: #27ae60;
 }
 
 /* ----- !Login Page ----- */

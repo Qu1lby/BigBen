@@ -42,6 +42,11 @@
             <p class="login-error"><%= arg['error_signin'] %></p>
           </div>
           <% } %>
+          <% if (typeof arg['error_tech'] != 'undefined') { %>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <p class="login-error"><%= arg['error_tech'] %></p>
+          </div>
+          <% } %>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" type="text" id="username_si" name="username_si" ng-model="SignUsername">
             <label class="mdl-textfield__label" for="username">Username</label>
@@ -60,8 +65,21 @@
           <% if (typeof arg['error_auth'] != 'undefined') { %>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <p class="login-error"><%= arg['error_auth'] %></p>
+          </div
+          <% } %>
+          <% if (typeof arg['error_tech'] != 'undefined') { %>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <p class="login-error"><%= arg['error_tech'] %></p>
           </div>
           <% } %>
+          <% if (typeof arg['signin'] != 'undefined') { %>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <p class="login-success"><%= arg['signin'] %></p>
+          </div>
+          <% } %>
+          
+          
+          
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" type="text" id="username" name="username" ng-model="LogUsername">
             <label class="mdl-textfield__label" for="username">Username</label>
