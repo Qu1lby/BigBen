@@ -18,11 +18,12 @@ module.exports = function (app, database, passport, passwordHash) {
 			database.executeQuery('SELECT * FROM user WHERE name_user = "' + username + '" LIMIT 1', function (rows) {
 				if (!rows.length)
 					return done(null, false);
+				
+				if (passwordHash.verify(password, rows[0].pass_user)) {
+					return done(null, rows[0]);
+				}
 
-				if (passwordHash.verify(rows[0].pass_user, password))
-					return done(null, false);
-
-				return done(null, rows[0]);
+				return done(null, false);
 			});
 		}));
 }
