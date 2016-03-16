@@ -44,6 +44,11 @@
             <p class="login-error"><%= arg['error_tech'] %></p>
           </div>
           <% } %>
+          <% if (typeof arg['error'] != 'undefined') { %>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <p class="login-error"><%= arg['error'] %></p>
+          </div>
+          <% } %>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" type="text" id="username_si" name="username_si">
             <label class="mdl-textfield__label" for="username">Username</label>
@@ -69,9 +74,9 @@
             <p class="login-error"><%= arg['error_tech'] %></p>
           </div>
           <% } %>
-          <% if (typeof arg['error_signin'] != 'undefined') { %>
+          <% if (typeof arg['error'] != 'undefined') { %>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <p class="login-error"><%= arg['error_signin'] %></p>
+            <p class="login-error"><%= arg['error'] %></p>
           </div>
           <% } %>
           <% if (typeof arg['signin'] != 'undefined') { %>

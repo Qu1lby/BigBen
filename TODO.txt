@@ -1,19 +1,6 @@
-Login.ejs : Si arg[error] != undefined 
-
-	-> Afficher l'erreur
-	
-						Si arg[signin] != undefined
-	
-	-> Afficher le message de connection
-	
-	-> Quelques broutilles avec les couleurs
-	
-	
-index.ejs : Bouton logout (/logout)
+﻿index.ejs :
 
 	-> Afficher le score relatif à la catégorie
-	
-	-> Soucis avec le by <3 de Tic et Tac
 	
 	-> Affichage dynamique des catégories :
 			arg['categories'] = res_1; Tu as pour chaque clé : id_category (garder pour la redirection play?id=1 ) et name_category
