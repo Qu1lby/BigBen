@@ -15,14 +15,7 @@ rank.ejs : Tout est fait -> Faire un tableau ESTHETIQUE :P
 	
 	-> Bouton retour sur la page d'accueil
 	
-
-
 	
-	Je commence a taffer la dessous :)
-	
-
-	-> Afficher le nom du mec point total
-	-> J'aime bien les couleurs mode trivial pursuit, je peux te filer un tableau avec les codes si tu m'envois les couleurs comme ça même en dynamique ca change
 	
 	
 game.ejs : Ajouter de la musique ! Genre les beatles pour le quizz London (osef des droits c'est du local) :D
