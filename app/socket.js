@@ -22,18 +22,18 @@ module.exports = function (app, database, io) {
 		socket.on('play_first', function (data) {
 
 			var myQuery = 'SELECT * FROM matchs, game WHERE id_user = ' + req.user.id_user + ' AND id_category = ' + data.category;
-			var myGame = 0;
 			database.executeQuery(myQuery, function (res_1) {
-				if (res_1.length == 0) {
-					myQuery = 'INSERT INTO game(id_category) VALUES ( ' + data.category + ' )';
-					database.executeQuery(myQuery, function (res_2) {
-						myGame = res_2[0].id_game;
-						myQuery = 'INSERT INTO matchs(id_game, id_user) VALUE ( ' + myGame + ', ' + data.id_user + ')';
-					});
-				} else myGame = res_1[0].id_game;
+//				if (res_1.length == 0) {
+//					myQuery = 'INSERT INTO game(id_category) VALUES ( ' + data.category + ' )';
+//					database.executeQuery(myQuery, function (res_2) {
+//						myGame = res_2[0].id_game;
+//						myQuery = 'INSERT INTO matchs(id_game, id_user) VALUE ( ' + myGame + ', ' + data.id_user + ')';
+//					});
+//				} else myGame = res_1[0].id_game;
+//				console.log(myGame);
 
 				// Save in session
-				socket.handshake.session.passport.user.id_game = myGame;
+				socket.handshake.session.passport.user.id_game = res_1[0].id_game;
 
 				myQuery = 'SELECT * FROM question NATURAL JOIN level WHERE level = 1 AND id_category = ' + data.category;
 				database.executeQuery(myQuery, function (res_3) {
@@ -41,13 +41,13 @@ module.exports = function (app, database, io) {
 					var random = Math.floor((Math.random() * res_3.length));
 
 					socket.emit('question', {
-						id_game: myGame,
-						id_question: res[random].id_question,
-						question: res[random].text_question,
-						a_1: res[random].answer_1,
-						a_2: res[random].answer_2,
-						a_3: res[random].answer_3,
-						a_4: res[random].answer_4
+						id_game: res_1[0].id_game,
+						id_question: res_3[random].id_question,
+						question: res_3[random].text_question,
+						a_1: res_3[random].answer_1,
+						a_2: res_3[random].answer_2,
+						a_3: res_3[random].answer_3,
+						a_4: res_3[random].answer_4
 					});
 				});
 			});
@@ -64,7 +64,6 @@ module.exports = function (app, database, io) {
 						verdict: false
 					});
 				}
-
 				if (data.answer == result[0]) {
 					socket.emit('back_answer', {
 						verdict: true
@@ -99,7 +98,7 @@ module.exports = function (app, database, io) {
 		/** **Game Over :** 
 		 * Parameters needed : level
 		 **/
-		socket.on('next_one', function (data) {
+		socket.on('game_over', function (data) {
 
 			var random = (Math.floor((Math.random() * data.level) * 20));
 			var point = (10 * data.level * data.level)
