@@ -4,23 +4,21 @@ Login.ejs : Parfait sauf hover sur les boutons : couleur moche
 	
 index.ejs : Bouton logout (/logout)
 
+	-> Bouton LOGOUT ne marche plus
+	-> On peut pas scroll
 	-> Ajouter bouton TOP 15 players "/podium"
-	
-					
+			
 rank.ejs : Tout est fait -> Faire un tableau ESTHETIQUE :P
 	
+	-> Bouton retour sur la page d'accueil
+	
+logout.ejs : http://www.cssportal.com/css-tooltip-generator/# faire un petit tooltip sur le bouton deco
 	
 	
-	
-	Je commence a taffer la dessus :)
+	Je commence a taffer la dessous :)
 	
 
-	-> Afficher le score relatif à la catégorie
-	
-	-> Affichage dynamique des catégories :
-			arg['categories'] = res_1; Tu as pour chaque clé : id_category (garder pour la redirection play?id=1 ) et name_category
-			arg['points'] = concat_res; Tu as pour chaque clé (name_category) les points correspondants aux joueurs. Si taille == 0 : pas joué.
-	
+	-> Afficher le nom du mec point total
 	-> J'aime bien les couleurs mode trivial pursuit, je peux te filer un tableau avec les codes si tu m'envois les couleurs comme ça même en dynamique ca change
 	
 	

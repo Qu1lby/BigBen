@@ -16,7 +16,9 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 					for (var i = 0; i < res_1.length; i++) {
 						for (var j = 0; j < res_2.length; j++) {
 							if (res_2[j].id_category == res_1[i].id_category) {
-								concat_res[res_1.name_category] = res_2.point_match;
+								concat_res[res_1[i].name_category] = res_2[j].point_match;
+								console.log(res_1[i].name_category);
+								console.log(concat_res[res_1[i].name_category]);
 							}
 						}
 					}
@@ -25,6 +27,7 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 				var arg = [];
 				arg['categories'] = res_1;
 				arg['points'] = concat_res;
+				console.log(arg['points']['Cinema']);
 				arg['user_id'] = req.user.id_user;
 				arg['user_name'] = req.user.name;
 				giveRender(req, res, 'index.ejs', 'Home - BigBen', arg);
