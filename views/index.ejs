@@ -38,7 +38,7 @@
             <div class="mdl-card__supporting-text"><%= arg['categories'][i].desc_category%>
             </div>
             <div class="sport mdl-card__actions mdl-card--border">
-              <button style="background:#<%=arg['categories'][i].desc_color %>" class="sport mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+              <button style="background:#<%=arg['categories'][i].desc_color %>" class="sport mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="window.location.href='/play?id=<%= arg['categories'][i].id_category%>'">
                 Get Started
               </button>
             </div>
@@ -48,9 +48,9 @@
               <h2 class="mdl-card__title-text text-center"><%= arg['categories'][i+1].name_category%></h2>
             </div>
 						
-						<% var nom = arg['categories'][i+1].name_category;
-						if(arg['points'][nom] != undefined) {%>
-							<h3 style="margin-top:0px"><%= arg['points'][nom]%> points</h3>
+						<% var nom_2 = arg['categories'][i+1].name_category;
+						if(arg['points'][nom_2] != undefined) {%>
+							<h3 style="margin-top:0px"><%= arg['points'][nom_2]%> points</h3>
 							<% } else { %>
 							<h3 style="margin-top:0px">0 points</h3>
 						<% } %>
@@ -58,7 +58,7 @@
             <div class="mdl-card__supporting-text"><%= arg['categories'][i+1].desc_category%>
             </div>
             <div class="history mdl-card__actions mdl-card--border">
-              <button style="background:#<%=arg['categories'][i+1].desc_color %>" class="history mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+              <button style="background:#<%=arg['categories'][i+1].desc_color %>" class="history mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="window.location.href='/play?id=<%= arg['categories'][i+1].id_category%>'">
                 Get Started
               </button>
             </div>

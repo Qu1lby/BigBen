@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     
   </head>
-  <body id="particles">
+  <body id="particles">	
     <% include includes/logout.ejs %>
     <div id="intro">
       <% include includes/header.ejs %>
@@ -30,7 +30,7 @@
           </div>
         </div>
         <div id="footer">
-          <h6 class="text-center">Developed w/ <span style="color:#e0392b">♥</span> by Kilian & Guillaume</h6>
+          <h6 class="text-center">Developped with <span style="color:#e0392b">♥</span> by Kilian & Guillaume</h6>
         </div>
       </div>
     </div>
@@ -42,6 +42,11 @@
   $('.message a').click(function(){
     $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
   });
+		
+		var soundObject = new Audio();
+		soundObject.src = "musics/The_Rolling_Stones.mp3";
+		soundObject.play();
+		soundObject.volume = 0.2
   </script>
   
 </html>

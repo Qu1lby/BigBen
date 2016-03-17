@@ -6,18 +6,16 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 
 		// Catch all categories availables
 		database.executeQuery("SELECT * FROM category", function (res_1) {
-
+			
 			myQuery = "SELECT game.id_category, matchs.point_match FROM game, matchs where matchs.id_game = game.id_game AND matchs.id_user = " + req.user.id_user;
 			database.executeQuery(myQuery, function (res_2) {
 
 				var concat_res = []
-
 				if (res_2.length != 0) {
 					for (var i = 0; i < res_1.length; i++) {
 						for (var j = 0; j < res_2.length; j++) {
-							if (res_2[j].id_category == res_1[i].id_category) {
+							if (res_2[j].id_category == res_1[i].id_category) 
 								concat_res[res_1[i].name_category] = res_2[j].point_match;
-							}
 						}
 					}
 				}
