@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 10 Mars 2016 à 11:06
+-- Généré le :  Jeu 17 Mars 2016 à 13:43
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -30,16 +30,19 @@ CREATE TABLE IF NOT EXISTS `category` (
   `id_category` tinyint(4) NOT NULL AUTO_INCREMENT,
   `name_category` varchar(25) NOT NULL,
   `desc_category` varchar(300) NOT NULL,
+  `desc_color` varchar(8) NOT NULL,
   PRIMARY KEY (`id_category`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Contenu de la table `category`
 --
 
-INSERT INTO `category` (`id_category`, `name_category`, `desc_category`) VALUES
-(1, 'London', 'Do you really know London and his secrets ?'),
-(2, 'Cinema', 'British and American famous movies ');
+INSERT INTO `category` (`id_category`, `name_category`, `desc_category`, `desc_color`) VALUES
+(1, 'London', 'Do you really know London and all his secrets ?', 'FF9800'),
+(2, 'Cinema', 'Test your knowledges about British and American movies !', 'AEEE00'),
+(3, 'The Royal Family', 'The British Royal Family is one of the most famous family in the world, right ?', '01B0F0'),
+(4, 'British famous music', 'The Beattles, David Bowie, Radiohead, The Rolling stones.. the best of British music !', 'FF358B');
 
 -- --------------------------------------------------------
 
@@ -133,7 +136,8 @@ CREATE TABLE IF NOT EXISTS `matchs` (
 --
 
 INSERT INTO `matchs` (`id_game`, `id_user`, `point_match`) VALUES
-(1, 8, 500);
+(1, 8, 500),
+(3, 8, 1000);
 
 -- --------------------------------------------------------
 
@@ -204,14 +208,15 @@ CREATE TABLE IF NOT EXISTS `user` (
   `pass_user` varchar(500) NOT NULL,
   PRIMARY KEY (`id_user`),
   UNIQUE KEY `name_user` (`name_user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Contenu de la table `user`
 --
 
 INSERT INTO `user` (`id_user`, `name_user`, `pass_user`) VALUES
-(8, 'Kili', 'sha1$ea0b2758$1$3a1a3371f4db3cfa816ab636b31b2af358604106');
+(8, 'Kilian', 'sha1$ea0b2758$1$3a1a3371f4db3cfa816ab636b31b2af358604106'),
+(19, 'Kili', 'sha1$574e2701$1$e522605e360b38495aef4fb40f4dfe58df0d088a');
 
 --
 -- Contraintes pour les tables exportées

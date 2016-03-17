@@ -7,13 +7,16 @@ index.ejs : Bouton logout (/logout)
 	-> Bouton LOGOUT ne marche plus
 	-> On peut pas scroll
 	-> Ajouter bouton TOP 15 players "/podium"
+	
+	-> arg['somme'] = somme;
+  -> arg['user_name'] = user.name;
 			
 rank.ejs : Tout est fait -> Faire un tableau ESTHETIQUE :P
 	
 	-> Bouton retour sur la page d'accueil
 	
-logout.ejs : http://www.cssportal.com/css-tooltip-generator/# faire un petit tooltip sur le bouton deco
-	
+
+
 	
 	Je commence a taffer la dessous :)
 	

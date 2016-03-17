@@ -17,20 +17,22 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 						for (var j = 0; j < res_2.length; j++) {
 							if (res_2[j].id_category == res_1[i].id_category) {
 								concat_res[res_1[i].name_category] = res_2[j].point_match;
-								console.log(res_1[i].name_category);
-								console.log(concat_res[res_1[i].name_category]);
 							}
 						}
 					}
 				}
 
-				var arg = [];
-				arg['categories'] = res_1;
-				arg['points'] = concat_res;
-				console.log(arg['points']['Cinema']);
-				arg['user_id'] = req.user.id_user;
-				arg['user_name'] = req.user.name;
-				giveRender(req, res, 'index.ejs', 'Home - BigBen', arg);
+				myQuery = "SELECT SUM(matchs.point_match) as somme FROM game, matchs where matchs.id_game = game.id_game AND matchs.id_user = " + req.user.id_user;
+				database.executeQuery(myQuery, function (res_3) {
+
+					var arg = [];
+					arg['categories'] = res_1;
+					arg['points'] = concat_res;
+					arg['somme'] = res_3[0].somme;
+					arg['user_id'] = req.user.id_user;
+					arg['user_name'] = req.user.name;
+					giveRender(req, res, 'index.ejs', 'Home - BigBen', arg);
+				});
 			});
 		});
 	});
@@ -146,11 +148,11 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 	function giveRender(req, res, page, title, compl_render) {
 		var render = [];
 		render['title'] = title;
-		
-		 // Add all extra informations
-    for (val in compl_render) {
-      render[val] = compl_render[val];
-    }
+
+		// Add all extra informations
+		for (val in compl_render) {
+			render[val] = compl_render[val];
+		}
 
 		res.render(page, {
 			arg: render
