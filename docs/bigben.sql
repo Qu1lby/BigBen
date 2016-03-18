@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 17 Mars 2016 à 13:43
+-- Généré le :  Ven 18 Mars 2016 à 15:55
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -40,9 +40,9 @@ CREATE TABLE IF NOT EXISTS `category` (
 
 INSERT INTO `category` (`id_category`, `name_category`, `desc_category`, `desc_color`) VALUES
 (1, 'London', 'Do you really know London and all his secrets ?', 'FF9800'),
-(2, 'Cinema', 'Test your knowledges about British and American movies !', 'AEEE00'),
-(3, 'The Royal Family', 'The British Royal Family is one of the most famous family in the world, right ?', '01B0F0'),
-(4, 'British famous music', 'The Beattles, David Bowie, Radiohead, The Rolling stones.. the best of British music !', 'FF358B');
+(2, 'Cinema', 'Test your knowledges about British and American movies !', '8BC34A'),
+(3, 'The Royal Family', 'The British Royal Family is one of the most famous family in the world, right ?', '2196F3'),
+(4, 'British famous music', 'The Beattles, David Bowie, Radiohead, The Rolling stones.. the best of British music !', 'E91E63');
 
 -- --------------------------------------------------------
 
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `game` (
   `id_game` smallint(6) NOT NULL AUTO_INCREMENT,
   `id_category` tinyint(4) NOT NULL,
   PRIMARY KEY (`id_game`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Contenu de la table `game`
@@ -62,7 +62,11 @@ CREATE TABLE IF NOT EXISTS `game` (
 
 INSERT INTO `game` (`id_game`, `id_category`) VALUES
 (1, 1),
-(3, 2);
+(3, 2),
+(4, 4),
+(5, 3),
+(6, 1),
+(7, 2);
 
 -- --------------------------------------------------------
 
@@ -137,7 +141,11 @@ CREATE TABLE IF NOT EXISTS `matchs` (
 
 INSERT INTO `matchs` (`id_game`, `id_user`, `point_match`) VALUES
 (1, 8, 500),
-(3, 8, 1000);
+(3, 8, 1000),
+(4, 8, 200),
+(5, 8, 300),
+(6, 20, 350),
+(7, 20, 470);
 
 -- --------------------------------------------------------
 
@@ -208,7 +216,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `pass_user` varchar(500) NOT NULL,
   PRIMARY KEY (`id_user`),
   UNIQUE KEY `name_user` (`name_user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
 
 --
 -- Contenu de la table `user`
@@ -216,7 +224,9 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id_user`, `name_user`, `pass_user`) VALUES
 (8, 'Kilian', 'sha1$ea0b2758$1$3a1a3371f4db3cfa816ab636b31b2af358604106'),
-(19, 'Kili', 'sha1$574e2701$1$e522605e360b38495aef4fb40f4dfe58df0d088a');
+(19, 'Guillaume', 'sha1$574e2701$1$e522605e360b38495aef4fb40f4dfe58df0d088a'),
+(20, 'Père Fourras', ''),
+(22, 'Kendji', '');
 
 --
 -- Contraintes pour les tables exportées
