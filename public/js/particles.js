@@ -5,6 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
     particleRadius: "5",
     parallaxMultiplier: 15,
   });
-  var intro = document.getElementById('intro');
-  intro.style.marginTop = - intro.offsetHeight / 2 + 'px';
+  var intro = document.getElementById('intro');/*
+  intro.style.marginTop = - intro.offsetHeight / 2 + 'px';*/
 }, false);

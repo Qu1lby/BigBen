@@ -2,20 +2,14 @@ DETAIL A FAIRE :
 
 Login.ejs : Parfait sauf hover sur les boutons : couleur moche	
 	
-index.ejs : Bouton logout (/logout)
+index.ejs : 
 
-	-> Bouton LOGOUT ne marche plus
 	-> On peut pas scroll
-	-> Ajouter bouton TOP 15 players "/podium"
 	
 	-> arg['somme'] = somme;
-  -> arg['user_name'] = user.name;
+  	-> arg['user_name'] = user.name;
 			
 rank.ejs : Tout est fait -> Faire un tableau ESTHETIQUE :P
-	
-	-> Bouton retour sur la page d'accueil
-	
-	
 	
 	
 game.ejs : Ajouter de la musique ! Genre les beatles pour le quizz London (osef des droits c'est du local) :D

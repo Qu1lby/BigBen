@@ -16,12 +16,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.logout {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-}
-
 .theme-color {
   color: #b53a42;
 }
@@ -32,12 +26,17 @@ body {
   overflow: hidden;
 }
 #intro {
-position: absolute;
+    position: absolute;
     left: 0;
-    top: 50%;
+    top: 10%;
     padding: 0 20px;
     width: 100%;
     text-align: center;
+}
+
+.user {
+      color: #fff;
+      padding-right: 17px;
 }
 
 /* ----- Login Page ----- */
@@ -178,6 +177,12 @@ position: absolute;
 
 #footer {
   color: white;
+  position:absolute;
+  bottom:0;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* ----- !Footer ----- */
