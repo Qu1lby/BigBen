@@ -34,7 +34,9 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 	router.get('/play', ensureAuthenticated, function (req, res, next) {
 		// Check query argument
 		if (req.query.id != undefined && !isNaN(req.query.id)) {
-			giveRender(req, res, 'game.ejs', 'Play - BigBen');
+			var arg = [];
+			arg['id'] = req.query.id;
+			giveRender(req, res, 'game.ejs', 'Play - BigBen', arg);
 		} else res.redirect('/404');
 	});
 
