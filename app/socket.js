@@ -23,14 +23,14 @@ module.exports = function (app, database, io) {
 
 			var myQuery = 'SELECT * FROM matchs, game WHERE id_user = ' + req.user.id_user + ' AND id_category = ' + data.category;
 			database.executeQuery(myQuery, function (res_1) {
-//				if (res_1.length == 0) {
-//					myQuery = 'INSERT INTO game(id_category) VALUES ( ' + data.category + ' )';
-//					database.executeQuery(myQuery, function (res_2) {
-//						myGame = res_2[0].id_game;
-//						myQuery = 'INSERT INTO matchs(id_game, id_user) VALUE ( ' + myGame + ', ' + data.id_user + ')';
-//					});
-//				} else myGame = res_1[0].id_game;
-//				console.log(myGame);
+				//				if (res_1.length == 0) {
+				//					myQuery = 'INSERT INTO game(id_category) VALUES ( ' + data.category + ' )';
+				//					database.executeQuery(myQuery, function (res_2) {
+				//						myGame = res_2[0].id_game;
+				//						myQuery = 'INSERT INTO matchs(id_game, id_user) VALUE ( ' + myGame + ', ' + data.id_user + ')';
+				//					});
+				//				} else myGame = res_1[0].id_game;
+				//				console.log(myGame);
 
 				// Save in session
 				socket.handshake.session.passport.user.id_game = res_1[0].id_game;
@@ -73,6 +73,40 @@ module.exports = function (app, database, io) {
 						verdict: false
 					});
 				}
+			});
+		});
+
+		/** **Check an answer :** 
+		 * Parameters needed : id_question, answer
+		 **/
+		socket.on('get_50', function (data) {
+			var myQuery = 'SELECT * FROM question WHERE id_question = ' + date.id_question;
+
+			database.executeQuery(myQuery, function (result) {
+
+				if (result[0].answer == 1)
+					socket.emit('back_50', {
+						q_1: 2,
+						q_2: 4
+					});
+
+				if (result[0].answer == 2)
+					socket.emit('back_50', {
+						q_1: 3,
+						q_2: 4
+					});
+
+				if (result[0].answer == 3)
+					socket.emit('back_50', {
+						q_1: 1,
+						q_2: 4
+					});
+
+				if (result[0].answer == 4)
+					socket.emit('back_50', {
+						q_1: 2,
+						q_2: 3
+					});
 			});
 		});
 
