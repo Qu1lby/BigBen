@@ -1,30 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    
-    <!-- Mobile First -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title><%= arg["title"] %></title>
-    
-    <!-- CSS | Material -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.indigo-pink.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    
-    <!-- CSS | Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    
-    <style>
-      body {
-        background: -webkit-linear-gradient(to left, #2c3e50, #34495e);
-        background: -moz-linear-gradient(to left, #2c3e50, #34495e);
-        background: -o-linear-gradient(to left, #2c3e50, #34495e);
-        background: linear-gradient(to left, #2c3e50, #34495e);
-      }
-    </style>
-    
-  </head>
+<% include includes/head.ejs %>
+
   <body id="particles">
     <div id="intro">
     <div class="login-page">
@@ -35,25 +10,25 @@
       <div class="form">
         <form class="register-form" action = "/signin" method="post">
           <% if (typeof arg['error_signin'] != 'undefined') { %>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <div class="mdl-textfield mdl-js-textfield">
             <p class="login-error"><%= arg['error_signin'] %></p>
           </div>
           <% } %>
           <% if (typeof arg['error_tech'] != 'undefined') { %>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <div class="mdl-textfield mdl-js-textfield">
             <p class="login-error"><%= arg['error_tech'] %></p>
           </div>
           <% } %>
           <% if (typeof arg['error'] != 'undefined') { %>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <div class="mdl-textfield mdl-js-textfield">
             <p class="login-error"><%= arg['error'] %></p>
           </div>
           <% } %>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <div class="mdl-textfield mdl-js-textfield">
             <input class="mdl-textfield__input" type="text" id="username_si" name="username_si">
             <label class="mdl-textfield__label" for="username">Username</label>
           </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <div class="mdl-textfield mdl-js-textfield">
             <input class="mdl-textfield__input" type="password" id="password_si" name="password_si">
             <label class="mdl-textfield__label" for="password">Password</label>
           </div>
@@ -65,30 +40,30 @@
         
         <form class="login-form" action = "/login" method="post">
 		  <% if (typeof arg['error_auth'] != 'undefined') { %>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <div class="mdl-textfield mdl-js-textfield">
             <p class="login-error"><%= arg['error_auth'] %></p>
           </div>
           <% } %>
           <% if (typeof arg['error_tech'] != 'undefined') { %>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <div class="mdl-textfield mdl-js-textfield">
             <p class="login-error"><%= arg['error_tech'] %></p>
           </div>
           <% } %>
           <% if (typeof arg['error'] != 'undefined') { %>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <div class="mdl-textfield mdl-js-textfield">
             <p class="login-error"><%= arg['error'] %></p>
           </div>
           <% } %>
           <% if (typeof arg['signin'] != 'undefined') { %>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <div class="mdl-textfield mdl-js-textfield">
             <p class="login-success"><%= arg['signin'] %></p>
           </div>
           <% } %>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <div class="mdl-textfield mdl-js-textfield">
             <input class="mdl-textfield__input" type="text" id="username" name="username">
             <label class="mdl-textfield__label" for="username">Username</label>
           </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <div class="mdl-textfield mdl-js-textfield">
             <input class="mdl-textfield__input" type="password" id="password" name="password">
             <label class="mdl-textfield__label" for="password">Password</label>
           </div>

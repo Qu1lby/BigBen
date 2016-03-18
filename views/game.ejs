@@ -1,21 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    
-    <!-- Mobile First -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title> <%= arg['title'] %></title>
-    
-    <!-- CSS | Material -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.indigo-pink.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    
-    <!-- CSS | Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    
-  </head>
+<% include includes/head.ejs %>
+
   <body id="particles">	
 
     <% include includes/navbar.ejs %>
@@ -30,6 +14,53 @@
               <h1>Which is the color of the white horse of the fucKing Henry IV ?</h1>
             </div>
           </div>
+        </div>
+        <div class="row">
+          <div class="container">
+            <div class="col-md-6">
+              <div class="answer">
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="answer-1">
+                  <input type="radio" id="answer-1" class="mdl-radio__button" name="options" value="1">
+                  <span class="answer-text mdl-radio__label">A Pancake</span>
+                </label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="answer">
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="answer-2">
+                  <input type="radio" id="answer-2" class="mdl-radio__button" name="options" value="2">
+                  <span class="answer-text mdl-radio__label">A big pancake</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="container">
+            <div class="col-md-6">
+              <div class="answer">
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="answer-3">
+                  <input type="radio" id="answer-3" class="mdl-radio__button" name="options" value="3">
+                  <span class="answer-text mdl-radio__label">I don't know</span>
+                </label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="answer">
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="answer-4">
+                  <input type="radio" id="answer-4" class="mdl-radio__button" name="options" value="4">
+                  <span class="answer-text mdl-radio__label">Answer D</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">
+            Yes it's my last words
+          </button>
         </div>
       </div>
     </div>
