@@ -29,7 +29,7 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 					arg['points'] = concat_res;
 					arg['somme'] = res_3[0].somme;
 					arg['user_id'] = req.user.id_user;
-					arg['user_name'] = req.user.name;
+					arg['user_name'] = req.user.name_user;
 					giveRender(req, res, 'index.ejs', 'Home - BigBen', arg);
 				});
 			});

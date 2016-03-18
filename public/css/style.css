@@ -39,6 +39,18 @@ body {
       padding-right: 17px;
 }
 
+.box {
+  width:70%;
+  background:#ecf0f1;
+  margin:0 auto;
+  padding-top: 8px;
+
+}
+
+.effect1{
+     box-shadow: 0 10px 6px -6px #777;
+}
+
 /* ----- Login Page ----- */
 
 .login-page {
