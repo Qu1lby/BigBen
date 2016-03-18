@@ -21,17 +21,10 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 					}
 				}
 
-				myQuery = "SELECT SUM(matchs.point_match) as somme FROM game, matchs where matchs.id_game = game.id_game AND matchs.id_user = " + req.user.id_user;
-				database.executeQuery(myQuery, function (res_3) {
-
-					var arg = [];
-					arg['categories'] = res_1;
-					arg['points'] = concat_res;
-					arg['somme'] = res_3[0].somme;
-					arg['user_id'] = req.user.id_user;
-					arg['user_name'] = req.user.name_user;
-					giveRender(req, res, 'index.ejs', 'Home - BigBen', arg);
-				});
+				var arg = [];
+				arg['categories'] = res_1;
+				arg['points'] = concat_res;
+				giveRender(req, res, 'index.ejs', 'Home - BigBen', arg);
 			});
 		});
 	});
@@ -153,8 +146,15 @@ module.exports = function (app, database, io, passport, passwordHash, router) {
 			render[val] = compl_render[val];
 		}
 
-		res.render(page, {
-			arg: render
+		render['user_id'] = req.user.id_user;
+		render['user_name'] = req.user.name_user;
+
+		myQuery = "SELECT SUM(matchs.point_match) as somme FROM game, matchs where matchs.id_game = game.id_game AND matchs.id_user = " + req.user.id_user;
+		database.executeQuery(myQuery, function (res_3) {
+			render['somme'] = res_3[0].somme;
+			res.render(page, {
+				arg: render
+			});
 		});
 	}
 
