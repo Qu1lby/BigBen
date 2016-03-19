@@ -8,14 +8,14 @@
       <% include includes/header.ejs %>
       <div class="container">
         
-        <div class="row">
+        <div class="row hideous" style="display: none;">
           <div class="col-md-12">
             <div id="question">
               <h1 id="socket_question">Start game by pressing the play button below</h1>
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row hideous" style="display: none;">
           <div class="container">
             <div class="col-md-6">
               <div class="answer">
@@ -36,7 +36,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row hideous" style="display: none;">
           <div class="container">
             <div class="col-md-6">
               <div class="answer">
@@ -58,8 +58,8 @@
         </div>
 
         <div class="row">
-          <button id="play" style="color: white" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary" type="submit">
-            Play
+          <button id="play" style="color: white; height: 100%; margin-top: 10%" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary" type="submit">
+            <h1>Play</h1>
           </button>
           <button id="submit" style="color: white; display: none;" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary" type="submit">
             Submit
@@ -85,23 +85,39 @@
   </script>
   
   <script>
+    var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
+        }
+    };
+
     var socket = io();
+    var level = 0;
+    var id_game;
+    var id_question;
+    var question;
+    var a_1;
+    var a_2;
+    var a_3;
+    var a_4;
 
     $("#play").on('click', function() {
       socket.emit('play_first', {
-        category: 1,
+        category: getUrlParameter('id'),
       });
       $("#play").hide();
       $("#submit").show();
+      $(".hideous").show();
     });
-    
-      var id_game;
-      var id_question;
-      var question;
-      var a_1;
-      var a_2;
-      var a_3;
-      var a_4;
 
     socket.on('question', function(data) {
       //Récupération de l'id correspondant
@@ -112,6 +128,7 @@
       a_2 = data.a_2;
       a_3 = data.a_3;
       a_4 = data.a_4;
+      level++;
 
       $("#socket_question").text(question);
       $("#answer_1").text(a_1);
@@ -122,7 +139,6 @@
     });
 
     $("#submit").on('click', function() {
-      console.log('answer');
       var answer;
       if ($('#checkbox_1').hasClass( "is-checked" )) {
         answer = 1;
@@ -144,7 +160,29 @@
 
     socket.on('back_answer', function(data) {
       var correction = data;
-      console.log(data);
+      if (data.verdict == false) {
+        console.log(level);
+        socket.emit('game_over', {
+          level: level
+        });
+      }
+      if (data.verdict == true) {
+        console.log(level);
+        socket.emit('next_one', {
+          level: level,
+          category: getUrlParameter('id')
+        });
+      }
     });
+
+    socket.on('end', function(data) {
+      var random = data.random;
+      var points = data.points;
+      result = random + points;
+      alert('You lose ! Result : ' + result);
+      window.location.replace("/");
+    });
+
+
   </script>
 </html>

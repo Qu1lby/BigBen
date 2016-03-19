@@ -32,7 +32,7 @@ module.exports = function (app, database, io) {
 				//				console.log(myGame);
 
 				// Save in session
-				socket.handshake.session.passport.user.id_game = res_1[0].id_game;
+				socket.handshake.session.id_game = res_1[0].id_game;
 
 				myQuery = 'SELECT * FROM question NATURAL JOIN level WHERE level = 1 AND id_category = ' + data.category;
 				database.executeQuery(myQuery, function (res_3) {
@@ -136,7 +136,7 @@ module.exports = function (app, database, io) {
 			var random = (Math.floor((Math.random() * data.level) * 20));
 			var point = (10 * data.level * data.level)
 
-			myQuery = 'UPDATE matchs SET point_match = ' + (point + random) + ' WHERE id_game = ' + socket.handshake.session.passport.user.id_game;
+			myQuery = 'UPDATE matchs SET point_match = ' + (point + random) + ' WHERE id_game = ' + socket.handshake.session.id_game;
 			database.executeQuery(myQuery, function (res) {
 				socket.emit('end', {
 					random: random,
