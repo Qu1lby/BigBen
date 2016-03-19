@@ -21,7 +21,7 @@ module.exports = function (app, database, io) {
 		 **/
 		socket.on('play_first', function (data) {
 
-			var myQuery = 'SELECT * FROM matchs, game WHERE id_user = ' + req.user.id_user + ' AND id_category = ' + data.category;
+			var myQuery = 'SELECT * FROM matchs, game WHERE id_user = ' + socket.handshake.session.user.id_user + ' AND id_category = ' + data.category;
 			database.executeQuery(myQuery, function (res_1) {
 				//				if (res_1.length == 0) {
 				//					myQuery = 'INSERT INTO game(id_category) VALUES ( ' + data.category + ' )';
@@ -114,7 +114,7 @@ module.exports = function (app, database, io) {
 		 * Parameters needed : level, category
 		 **/
 		socket.on('next_one', function (data) {
-			myQuery = 'SELECT * FROM question NATURAL JOIN level WHERE level = ' + data.level + ' AND id_category = ' + data.category;
+			var myQuery = 'SELECT * FROM question NATURAL JOIN level WHERE level = ' + data.level + ' AND id_category = ' + data.category;
 			database.executeQuery(myQuery, function (result) {
 				var random = Math.floor((Math.random() * result.length));
 
