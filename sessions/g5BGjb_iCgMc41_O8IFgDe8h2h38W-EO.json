@@ -1,0 +1,12 @@
+{
+  "cookie": {
+    "originalMaxAge": null,
+    "expires": null,
+    "httpOnly": true,
+    "path": "/"
+  },
+  "__lastAccess": 1458419795661,
+  "passport": {
+    "user": 8
+  }
+}

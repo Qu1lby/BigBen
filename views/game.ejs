@@ -11,7 +11,7 @@
         <div class="row">
           <div class="col-md-12">
             <div id="question">
-              <h1>Which is the color of the white horse of the fucKing Henry IV ?</h1>
+              <h1 id="socket_question">Start game by pressing the play button below</h1>
             </div>
           </div>
         </div>
@@ -19,17 +19,17 @@
           <div class="container">
             <div class="col-md-6">
               <div class="answer">
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="answer-1">
+                <label id="checkbox_1" class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="answer-1">
                   <input type="radio" id="answer-1" class="mdl-radio__button" name="options" value="1">
-                  <span class="answer-text mdl-radio__label">A Pancake</span>
+                  <span id="answer_1" class="answer-text mdl-radio__label">1: </span>
                 </label>
               </div>
             </div>
             <div class="col-md-6">
               <div class="answer">
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="answer-2">
+                <label id="checkbox_2" class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="answer-2">
                   <input type="radio" id="answer-2" class="mdl-radio__button" name="options" value="2">
-                  <span class="answer-text mdl-radio__label">A big pancake</span>
+                  <span id="answer_2" class="answer-text mdl-radio__label">2: </span>
                 </label>
               </div>
             </div>
@@ -40,17 +40,17 @@
           <div class="container">
             <div class="col-md-6">
               <div class="answer">
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="answer-3">
+                <label id="checkbox_3" class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="answer-3">
                   <input type="radio" id="answer-3" class="mdl-radio__button" name="options" value="3">
-                  <span class="answer-text mdl-radio__label">I don't know</span>
+                  <span id="answer_3" class="answer-text mdl-radio__label">3: </span>
                 </label>
               </div>
             </div>
             <div class="col-md-6">
               <div class="answer">
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="answer-4">
+                <label id="checkbox_4" class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="answer-4">
                   <input type="radio" id="answer-4" class="mdl-radio__button" name="options" value="4">
-                  <span class="answer-text mdl-radio__label">Answer D</span>
+                  <span id="answer_4" class="answer-text mdl-radio__label">4: </span>
                 </label>
               </div>
             </div>
@@ -58,8 +58,11 @@
         </div>
 
         <div class="row">
-          <button style="color: white" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">
-            Yes it's my last words
+          <button id="play" style="color: white" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary" type="submit">
+            Play
+          </button>
+          <button id="submit" style="color: white; display: none;" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary" type="submit">
+            Submit
           </button>
         </div>
       </div>
@@ -81,4 +84,67 @@
 		soundObject.volume = 0.2
   </script>
   
+  <script>
+    var socket = io();
+
+    $("#play").on('click', function() {
+      socket.emit('play_first', {
+        category: 1,
+      });
+      $("#play").hide();
+      $("#submit").show();
+    });
+    
+      var id_game;
+      var id_question;
+      var question;
+      var a_1;
+      var a_2;
+      var a_3;
+      var a_4;
+
+    socket.on('question', function(data) {
+      //Récupération de l'id correspondant
+      id_game = data.myGame;
+      id_question = data.id_question;
+      question = data.question;
+      a_1 = data.a_1;
+      a_2 = data.a_2;
+      a_3 = data.a_3;
+      a_4 = data.a_4;
+
+      $("#socket_question").text(question);
+      $("#answer_1").text(a_1);
+      $("#answer_2").text(a_2);
+      $("#answer_3").text(a_3);
+      $("#answer_4").text(a_4);
+
+    });
+
+    $("#submit").on('click', function() {
+      console.log('answer');
+      var answer;
+      if ($('#checkbox_1').hasClass( "is-checked" )) {
+        answer = 1;
+      }
+      if ($('#checkbox_2').hasClass( "is-checked" )) {
+        answer = 2;
+      }
+      if ($('#checkbox_3').hasClass( "is-checked" )) {
+        answer = 3;
+      }
+      if ($('#checkbox_4').hasClass( "is-checked" )) {
+        answer = 4;
+      }
+      socket.emit('get_answer', {
+        id_question: id_question,
+        answer: answer
+      });
+    });
+
+    socket.on('back_answer', function(data) {
+      var correction = data;
+      console.log(data);
+    });
+  </script>
 </html>

@@ -8,7 +8,7 @@ module.exports = function (app, database, io) {
 		/* Update current user and store informations */
 		if (socket.handshake.session.passport != undefined) {
 			if (socket.handshake.session.passport.user != undefined) {
-				database.executeQuery('SELECT * FROM users WHERE id_user = ' + socket.handshake.session.passport.user, function (result) {
+				database.executeQuery('SELECT * FROM user WHERE id_user = ' + socket.handshake.session.passport.user, function (result) {
 					socket.handshake.session.user = result[0];
 					console.log('Saving user');
 				});
@@ -20,8 +20,7 @@ module.exports = function (app, database, io) {
 		 * Parameters needed : category
 		 **/
 		socket.on('play_first', function (data) {
-
-			var myQuery = 'SELECT * FROM matchs, game WHERE id_user = ' + req.user.id_user + ' AND id_category = ' + data.category;
+			var myQuery = 'SELECT * FROM matchs, game WHERE id_user = ' + socket.handshake.session.user.id_user + ' AND id_category = ' + data.category;
 			database.executeQuery(myQuery, function (res_1) {
 				//				if (res_1.length == 0) {
 				//					myQuery = 'INSERT INTO game(id_category) VALUES ( ' + data.category + ' )';
@@ -57,14 +56,14 @@ module.exports = function (app, database, io) {
 		 * Parameters needed : id_question, answer
 		 **/
 		socket.on('get_answer', function (data) {
-			var myQuery = 'SELECT answer FROM question WHERE id_question = ' + date.id_question;
+			var myQuery = 'SELECT answer FROM question WHERE id_question = ' + data.id_question;
 			database.executeQuery(myQuery, function (result) {
 				if (result.length == 0) {
 					socket.emit('back_answer', {
 						verdict: false
 					});
 				}
-				if (data.answer == result[0]) {
+				if (data.answer == result[0].answer) {
 					socket.emit('back_answer', {
 						verdict: true
 					});
@@ -114,7 +113,7 @@ module.exports = function (app, database, io) {
 		 * Parameters needed : level, category
 		 **/
 		socket.on('next_one', function (data) {
-			myQuery = 'SELECT * FROM question NATURAL JOIN level WHERE level = ' + data.level + ' AND id_category = ' + data.category;
+			var myQuery = 'SELECT * FROM question NATURAL JOIN level WHERE level = ' + data.level + ' AND id_category = ' + data.category;
 			database.executeQuery(myQuery, function (result) {
 				var random = Math.floor((Math.random() * result.length));
 
