@@ -1,18 +1,7 @@
-DETAIL A FAIRE : 
-
-Login.ejs : Parfait sauf hover sur les boutons : couleur moche	
-	
-index.ejs : 
-
-	-> On peut pas scroll
-	
-	-> arg['somme'] = somme;
-  	-> arg['user_name'] = user.name;
-			
-rank.ejs : Tout est fait -> Faire un tableau ESTHETIQUE :P
+﻿DETAIL A FAIRE : 
 	
 	
-game.ejs : Ajouter de la musique ! Genre les beatles pour le quizz London (osef des droits c'est du local) :D
+game.ejs : 
 
 	-> Bouton play qui emit avec l'id_category (URL) sous le nom "category" au socket "play_first"
 				-> RETURN socket "question"	id_game: myGame, id_question, question, a_1, a_2, a_3, a_4
