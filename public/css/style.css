@@ -200,6 +200,10 @@ body {
 
 /* ----- Question ----- */
 
+#play_button {
+  margin: 15px;
+}
+
 #question {
   background: #fff;
   border-radius: 2px;
