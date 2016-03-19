@@ -1,11 +1,4 @@
-﻿DETAIL A FAIRE : 
-	
-	
-game.ejs : 
-
-	-> Bouton play qui emit avec l'id_category (URL) sous le nom "category" au socket "play_first"
-				-> RETURN socket "question"	id_game: myGame, id_question, question, a_1, a_2, a_3, a_4
-				
-	-> Après choix d'une réponse : socket "get_answer" avec id_question, answer (ID answer)
-				-> RETURN socket "back_answer" : verdict -> true or false
-				
+﻿A FAIRE : 
+	Vérifier qu'une question n'est pas posée 2x dans la même partie
+	Faire un aléatoire de l'ordre des réponses si possible
+	Conserver dans la base le meilleur score sur une catégorie de jeu	

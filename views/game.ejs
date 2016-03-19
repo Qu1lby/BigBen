@@ -10,8 +10,13 @@
         
         <div class="row hideous" style="display: none;">
           <div class="col-md-12">
+             <div class="progress">
+                <div id="level-bar" class="progress-bar progress-bar-striped active" role="progressbar"
+                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                </div>
+              </div>
             <div id="question">
-              <h1 id="socket_question">Start game by pressing the play button below</h1>
+              <h1 id="socket_question"></h1>
             </div>
           </div>
         </div>
@@ -129,6 +134,8 @@
       a_3 = data.a_3;
       a_4 = data.a_4;
       level++;
+      
+      $("#level-bar").attr('style', 'width:'+(level-1)*10+'%');
 
       $("#socket_question").text(question);
       $("#answer_1").text(a_1);
