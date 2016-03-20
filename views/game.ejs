@@ -218,6 +218,19 @@
       }
       if (data.verdict == true) {
         console.log(level);
+				
+				if ($('#checkbox_1').hasClass( "is-checked" )) {
+					document.getElementById("answer_1").style.color = "#16C41B";
+				}
+				if ($('#checkbox_2').hasClass( "is-checked" )) {
+					document.getElementById("answer_2").style.color = "#16C41B";
+				}
+				if ($('#checkbox_3').hasClass( "is-checked" )) {
+					document.getElementById("answer_3").style.color = "#16C41B";
+				}
+				if ($('#checkbox_4').hasClass( "is-checked" )) {
+					document.getElementById("answer_4").style.color = "#16C41B";
+				}
 			
 				soundObject.play();
 				soundObject_moit.pause();
@@ -225,11 +238,27 @@
 				soundObject_right.src = "musics/right.mp3";
 				soundObject_right.play();
 				soundObject_right.volume = 0.1
-
-        socket.emit('next_one', {
+				
+				setTimeout(function(){
+				 socket.emit('next_one', {
           level: level,
           category: getUrlParameter('id')
-        });
+        	});
+					
+					if ($('#checkbox_1').hasClass( "is-checked" )) {
+						document.getElementById("answer_1").style.color = "#000000";
+					}
+					if ($('#checkbox_2').hasClass( "is-checked" )) {
+						document.getElementById("answer_2").style.color = "#000000";
+					}
+					if ($('#checkbox_3').hasClass( "is-checked" )) {
+						document.getElementById("answer_3").style.color = "#000000";
+					}
+					if ($('#checkbox_4').hasClass( "is-checked" )) {
+						document.getElementById("answer_4").style.color = "#000000";
+					}
+			}, 1000);
+       
       }
     });
 
