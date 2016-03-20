@@ -129,7 +129,7 @@
 		
 		$("#moit").on('click', function() {
       socket.emit('get_50', {
-        id_question: getUrlParameter('id'),
+        id_question: id_question,
       });
 			
 			soundObject.pause();
