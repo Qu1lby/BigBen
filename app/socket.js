@@ -60,7 +60,8 @@ module.exports = function (app, database, io) {
 			database.executeQuery(myQuery, function (result) {
 				if (result.length == 0) {
 					socket.emit('back_answer', {
-						verdict: false
+						verdict: false,
+						wrong: data.answer
 					});
 				}
 				if (data.answer == result[0].answer) {
@@ -69,7 +70,8 @@ module.exports = function (app, database, io) {
 					});
 				} else {
 					socket.emit('back_answer', {
-						verdict: false
+						verdict: false,
+						wrong: data.answer
 					});
 				}
 			});
@@ -79,10 +81,9 @@ module.exports = function (app, database, io) {
 		 * Parameters needed : id_question, answer
 		 **/
 		socket.on('get_50', function (data) {
-			var myQuery = 'SELECT * FROM question WHERE id_question = ' + date.id_question;
+			var myQuery = 'SELECT * FROM question WHERE id_question = ' + data.id_question;
 
 			database.executeQuery(myQuery, function (result) {
-
 				if (result[0].answer == 1)
 					socket.emit('back_50', {
 						q_1: 2,
@@ -113,19 +114,34 @@ module.exports = function (app, database, io) {
 		 * Parameters needed : level, category
 		 **/
 		socket.on('next_one', function (data) {
-			var myQuery = 'SELECT * FROM question NATURAL JOIN level WHERE level = ' + data.level + ' AND id_category = ' + data.category;
-			database.executeQuery(myQuery, function (result) {
-				var random = Math.floor((Math.random() * result.length));
 
-				socket.emit('question', {
-					id_question: result[random].id_question,
-					question: result[random].text_question,
-					a_1: result[random].answer_1,
-					a_2: result[random].answer_2,
-					a_3: result[random].answer_3,
-					a_4: result[random].answer_4
+			if (data.level == 11) {
+				var random = (Math.floor((Math.random() * 10) * 15));
+				var point = 1000;
+
+				myQuery = 'UPDATE matchs SET point_match = ' + (point + random) + ' WHERE id_game = ' + socket.handshake.session.id_game;
+				database.executeQuery(myQuery, function (res) {
+					socket.emit('end_win', {
+						random: random,
+						points: point
+					});
 				});
-			});
+			} else {
+
+				var myQuery = 'SELECT * FROM question NATURAL JOIN level WHERE level = ' + data.level + ' AND id_category = ' + data.category;
+				database.executeQuery(myQuery, function (result) {
+					var random = Math.floor((Math.random() * result.length));
+
+					socket.emit('question', {
+						id_question: result[random].id_question,
+						question: result[random].text_question,
+						a_1: result[random].answer_1,
+						a_2: result[random].answer_2,
+						a_3: result[random].answer_3,
+						a_4: result[random].answer_4
+					});
+				});
+			}
 		});
 
 		/** **Game Over :** 

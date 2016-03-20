@@ -10,7 +10,7 @@
         
         <div class="row hideous" style="display: none;">
           <div class="col-md-12">
-             <div class="progress">
+             <div class="progress" style="margin-top:10px">
                 <div id="level-bar" class="progress-bar progress-bar-striped active" role="progressbar"
                 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
                 </div>
@@ -67,9 +67,12 @@
             <h1 id="play_button">Play</h1>
           </button>
           <button id="submit" style="color: white; display: none;" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary" type="submit">
-            Submit
+            Last words
           </button>
         </div>
+				<button id="moit" style="color: white; display: none; margin-top: 20px" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">
+            Super Moit-Moit
+        </button>
       </div>
     </div>
       <% include includes/footer.ejs %>
@@ -87,9 +90,7 @@
 		soundObject.src = "musics/The_Rolling_Stones.mp3";
 		soundObject.play();
 		soundObject.volume = 0.2
-  </script>
-  
-  <script>
+ 
     var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
         sURLVariables = sPageURL.split('&'),
@@ -106,7 +107,7 @@
     };
 
     var socket = io();
-    var level = 0;
+    var level = 1;
     var id_game;
     var id_question;
     var question;
@@ -122,8 +123,36 @@
       $("#play").hide();
       $("#submit").show();
       $(".hideous").show();
+			$("#moit").show();
+    });
+		
+		$("#moit").on('click', function() {
+      socket.emit('get_50', {
+        id_question: getUrlParameter('id'),
+      });
+			
+			soundObject.pause();
+			var soundObject_moit = new Audio();
+			soundObject_moit.src = "musics/joker.mp3";
+			soundObject_moit.play();
+			soundObject_moit.volume = 0.5
+			document.getElementById("moit").setAttribute("disabled", "disabled");
     });
 
+		socket.on('back_50', function(data) {
+			if(data.q_1 == 1 || data.q_2 == 1)
+				 $("#answer_1").text("The answer 1 ");
+			
+			if(data.q_1 == 2 || data.q_2 == 2)
+				 $("#answer_2").text("The answer 2 ");
+			
+			if(data.q_1 == 3 || data.q_2 == 3)
+				 $("#answer_3").text("The answer 3 ");
+			
+			if(data.q_1 == 4 || data.q_2 == 4)
+				 $("#answer_4").text("The answer 4 ");
+		});
+		
     socket.on('question', function(data) {
       //Récupération de l'id correspondant
       id_game = data.myGame;
@@ -163,18 +192,38 @@
         id_question: id_question,
         answer: answer
       });
-    });
+    });	
 
     socket.on('back_answer', function(data) {
       var correction = data;
       if (data.verdict == false) {
-        console.log(level);
+        
+				if ($('#checkbox_1').hasClass( "is-checked" )) {
+					document.getElementById("answer_1").style.color = "#ff0000";
+				}
+				if ($('#checkbox_2').hasClass( "is-checked" )) {
+					document.getElementById("answer_2").style.color = "#ff0000";
+				}
+				if ($('#checkbox_3').hasClass( "is-checked" )) {
+					document.getElementById("answer_3").style.color = "#ff0000";
+				}
+				if ($('#checkbox_4').hasClass( "is-checked" )) {
+					document.getElementById("answer_4").style.color = "#ff0000";
+				}
+				
         socket.emit('game_over', {
           level: level
         });
       }
       if (data.verdict == true) {
         console.log(level);
+			
+				soundObject.play();
+				var soundObject_right = new Audio();
+				soundObject_right.src = "musics/right.mp3";
+				soundObject_right.play();
+				soundObject_right.volume = 0.1
+
         socket.emit('next_one', {
           level: level,
           category: getUrlParameter('id')
@@ -186,10 +235,27 @@
       var random = data.random;
       var points = data.points;
       result = random + points;
-      alert('You lose ! Result : ' + result);
+			
+			soundObject.pause();
+			var soundObject_wrong = new Audio();
+			soundObject_wrong.src = "musics/wrong.mp3";
+			soundObject_wrong.play();
+			soundObject_wrong.volume = 0.2
+			
+			setTimeout(function(){
+				alert('You lose ! Result : ' + result);
+      	window.location.replace("/");
+			}, 1500);
+     
+    });
+		
+		socket.on('end_win', function(data) {
+      var random = data.random;
+      var points = data.points;
+      result = random + points;
+      alert('You win this category ! Result : ' + result);
       window.location.replace("/");
     });
-
 
   </script>
 </html>
