@@ -23,7 +23,7 @@
         <div class="row hideous" style="display: none;">
           <div class="container">
             <div class="col-md-6">
-              <div class="answer">
+              <div class="answer" id="answerbox_1">
                 <label id="checkbox_1" class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="answer-1">
                   <input type="radio" id="answer-1" class="mdl-radio__button" name="options" value="1">
                   <span id="answer_1" class="answer-text mdl-radio__label">1: </span>
@@ -31,7 +31,7 @@
               </div>
             </div>
             <div class="col-md-6">
-              <div class="answer">
+              <div class="answer" id="answerbox_2">
                 <label id="checkbox_2" class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="answer-2">
                   <input type="radio" id="answer-2" class="mdl-radio__button" name="options" value="2">
                   <span id="answer_2" class="answer-text mdl-radio__label">2: </span>
@@ -44,7 +44,7 @@
         <div class="row hideous" style="display: none;">
           <div class="container">
             <div class="col-md-6">
-              <div class="answer">
+              <div class="answer" id="answerbox_3">
                 <label id="checkbox_3" class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="answer-3">
                   <input type="radio" id="answer-3" class="mdl-radio__button" name="options" value="3">
                   <span id="answer_3" class="answer-text mdl-radio__label">3: </span>
@@ -52,7 +52,7 @@
               </div>
             </div>
             <div class="col-md-6">
-              <div class="answer">
+              <div class="answer" id="answerbox_4">
                 <label id="checkbox_4" class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="answer-4">
                   <input type="radio" id="answer-4" class="mdl-radio__button" name="options" value="4">
                   <span id="answer_4" class="answer-text mdl-radio__label">4: </span>
@@ -71,7 +71,7 @@
           </button>
         </div>
 				<button id="moit" style="color: white; display: none; margin-top: 20px" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">
-            Super Moit-Moit
+            50/50
         </button>
       </div>
     </div>
@@ -142,16 +142,16 @@
 
 		socket.on('back_50', function(data) {
 			if(data.q_1 == 1 || data.q_2 == 1)
-				 $("#answer_1").text("The answer 1 ");
+				 $("#answerbox_1").hide();
 			
 			if(data.q_1 == 2 || data.q_2 == 2)
-				 $("#answer_2").text("The answer 2 ");
+				 $("#answerbox_2").hide();
 			
 			if(data.q_1 == 3 || data.q_2 == 3)
-				 $("#answer_3").text("The answer 3 ");
+				 $("#answerbox_3").hide();
 			
 			if(data.q_1 == 4 || data.q_2 == 4)
-				 $("#answer_4").text("The answer 4 ");
+				 $("#answerbox_4").hide();
 		});
 		
     socket.on('question', function(data) {
@@ -164,6 +164,10 @@
       a_3 = data.a_3;
       a_4 = data.a_4;
       level++;
+      $("#answerbox_1").show();
+      $("#answerbox_2").show();
+      $("#answerbox_3").show();
+      $("#answerbox_4").show();
       
       $("#level-bar").attr('style', 'width:'+(level-1)*10+'%');
 
