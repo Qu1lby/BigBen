@@ -87,6 +87,7 @@
   });
 		
 		var soundObject = new Audio();
+		var soundObject_moit = new Audio();
 		soundObject.src = "musics/The_Rolling_Stones.mp3";
 		soundObject.play();
 		soundObject.volume = 0.2
@@ -132,7 +133,7 @@
       });
 			
 			soundObject.pause();
-			var soundObject_moit = new Audio();
+			soundObject_moit = new Audio();
 			soundObject_moit.src = "musics/joker.mp3";
 			soundObject_moit.play();
 			soundObject_moit.volume = 0.5
@@ -219,6 +220,7 @@
         console.log(level);
 			
 				soundObject.play();
+				soundObject_moit.pause();
 				var soundObject_right = new Audio();
 				soundObject_right.src = "musics/right.mp3";
 				soundObject_right.play();
