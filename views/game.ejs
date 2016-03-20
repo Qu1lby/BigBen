@@ -78,7 +78,40 @@
       <% include includes/footer.ejs %>
     </div>
   </body>
-      
+  <!-- GameOver modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">The Game is over</h4>
+      </div>
+      <div id="lose" class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="window.location.replace('/')">Close</button>
+      </div>
+    </div>
+  </div>
+  </div> 
+
+  <!-- Win  modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">You win the game !</h4>
+      </div>
+      <div id="win" class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="window.location.replace('/')">Close</button>
+      </div>
+    </div>
+  </div>
+  </div>
+
   <% include includes/script.ejs %>
   
   <script>
@@ -169,7 +202,7 @@
       $("#answerbox_3").show();
       $("#answerbox_4").show();
       
-      $("#level-bar").attr('style', 'width:'+(level-1)*10+'%');
+      $("#level-bar").attr('style', 'width:'+(level-2)*10+'%');
 
       $("#socket_question").text(question);
       $("#answer_1").text(a_1);
@@ -241,6 +274,7 @@
       var random = data.random;
       var points = data.points;
       result = random + points;
+      
 			
 			soundObject.pause();
 			var soundObject_wrong = new Audio();
@@ -249,8 +283,8 @@
 			soundObject_wrong.volume = 0.2
 			
 			setTimeout(function(){
-				alert('You lose ! Result : ' + result);
-      	window.location.replace("/");
+				$("#lose").text('Game Over ! Result : ' + result);
+        $('#myModal').modal('show');
 			}, 1500);
      
     });
@@ -259,8 +293,10 @@
       var random = data.random;
       var points = data.points;
       result = random + points;
-      alert('You win this category ! Result : ' + result);
-      window.location.replace("/");
+      setTimeout(function(){
+        $("#win").text('You win this category ! Result : ' + result);
+        $('#myModal').modal('show');
+      }, 1500);
     });
 
   </script>
